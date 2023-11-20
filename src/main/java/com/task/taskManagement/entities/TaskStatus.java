@@ -20,5 +20,6 @@ public class TaskStatus {
     private String statusName;
     @OneToMany(mappedBy = "taskStatus")
     private List<Task> tasks;
+    private Statusenum status;
 
 }

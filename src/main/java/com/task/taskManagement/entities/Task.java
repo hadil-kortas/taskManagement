@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,14 +19,15 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "due_date_id")
-    private DueDate dueDate;
+    private LocalDate dueDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "task_status_id")
     private TaskStatus taskStatus;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
 }
