@@ -1,4 +1,7 @@
 package com.task.taskManagement.dao;
 
-public interface TaskStatusRepository {
+import com.task.taskManagement.entities.TaskStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TaskStatusRepository extends JpaRepository<TaskStatus,Long> {
 }
