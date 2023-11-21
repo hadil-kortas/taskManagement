@@ -28,7 +28,7 @@ public class ServiceRole implements IServiceRole{
 
     @Override
     public List<Role> getRoleByMc(String mc) {
-        return roleRepository.findByNomContains(mc);
+        return roleRepository.findByRoleNameContains(mc);
     }
 
     @Override
