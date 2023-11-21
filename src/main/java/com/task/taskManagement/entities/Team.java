@@ -23,7 +23,7 @@ public class Team {
     private String name;
     @ManyToMany
     private Set<User> users = new HashSet<>();// if the team can have multiple users, to ensure uniqueness of users within the team.
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
     private List<Task> tasks;
 
 }

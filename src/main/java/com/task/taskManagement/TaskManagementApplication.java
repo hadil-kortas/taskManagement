@@ -2,6 +2,7 @@ package com.task.taskManagement;
 
 import com.task.taskManagement.dao.*;
 import com.task.taskManagement.entities.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -41,27 +42,22 @@ public class TaskManagementApplication implements CommandLineRunner {
 		userRepository.save(user2);
 
 
-		// Example of creating a new team
-		Team team = new Team();
-		team.setName("tigers");
-		team.getUsers().add(user2);
-		teamRepository.save(team);
-
 		Team team1 = new Team();
 		team1.setName("A");
 		team1.getUsers().add(user);
+		team1.getUsers().add(user2);
 		teamRepository.save(team1);
+
 
 		// Example of creating a new task
 		Task task = new Task();
 		task.setTitle("Create an admin dashboard");
-		task.setDescription("gdgsdsdgsgsdgds");
-		task.setTeam(team);
+		task.setDescription("admin dashboard");
+
+		teamRepository.findById(1L).get();
 		LocalDate d = LocalDate.of(2022,11,12);
 		task.setDueDate(d);
 		taskRepository.save(task);
-
-
 
 	}
 }
