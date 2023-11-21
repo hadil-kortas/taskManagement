@@ -3,10 +3,14 @@ package com.task.taskManagement.service;
 import com.task.taskManagement.dao.TaskStatusRepository;
 import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.TaskStatus;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@AllArgsConstructor
 public class ServiceTaskStatus implements IServiceTaskStatus {
     private TaskStatusRepository taskStatusRepository;
 

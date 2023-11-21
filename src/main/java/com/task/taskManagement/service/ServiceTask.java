@@ -3,9 +3,14 @@ package com.task.taskManagement.service;
 import com.task.taskManagement.dao.TaskRepository;
 import com.task.taskManagement.entities.Role;
 import com.task.taskManagement.entities.Task;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
+@AllArgsConstructor
 
 public class ServiceTask implements IServiceTask{
     private TaskRepository taskRepository;

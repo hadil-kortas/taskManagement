@@ -3,10 +3,14 @@ package com.task.taskManagement.service;
 import com.task.taskManagement.dao.TeamRepository;
 import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.Team;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@AllArgsConstructor
 public class ServiceTeam implements IServiceTeam{
     private TeamRepository teamRepository;
 
@@ -23,7 +27,7 @@ public class ServiceTeam implements IServiceTeam{
 
     @Override
     public List<Team> getTeamByMc(String mc) {
-        return teamRepository.findByNomContains(mc);
+        return teamRepository.findByNameContains(mc);
     }
 
     @Override
@@ -44,7 +48,6 @@ public class ServiceTeam implements IServiceTeam{
             Team existingTeam = existingTeamOptional.get();
 
             existingTeam.setName(editedTeam.getName());
-            existingTeam.setUsers(editedTeam.getUsers());
             existingTeam.setTasks(editedTeam.getTasks());
 
             teamRepository.save(existingTeam);

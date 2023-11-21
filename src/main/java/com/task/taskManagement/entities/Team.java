@@ -15,12 +15,13 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
+
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "teams")
+    @ManyToMany
     private Set<User> users = new HashSet<>();// if the team can have multiple users, to ensure uniqueness of users within the team.
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<Task> tasks;
