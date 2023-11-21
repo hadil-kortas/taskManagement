@@ -11,4 +11,5 @@ public interface IServiceTeam {
     public List<Team> getTeamByMc(String mc);
     public void deleteTeam(Long id);
     public Team getTeam (Long id);
+    public void editTeam(Long id, Team editedTeam);
 }

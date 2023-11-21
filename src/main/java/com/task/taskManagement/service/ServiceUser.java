@@ -1,35 +1,55 @@
 package com.task.taskManagement.service;
 
 import com.task.taskManagement.dao.UserRepository;
+import com.task.taskManagement.entities.Team;
 import com.task.taskManagement.entities.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ServiceUser implements IServiceUser{
     private UserRepository userRepository;
 
     @Override
-    public void saveUser(User c) {
+    public void saveUser(User u) {
+        userRepository.save(u);
 
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public List<User> getUserByMc(String mc) {
-        return null;
+        return userRepository.findByUsernameContains(mc);
     }
 
     @Override
     public void deleteUser(Long id) {
+        userRepository.deleteById(id);
 
     }
 
     @Override
     public User getUser(Long id) {
-        return null;
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void editUser(Long id, User editedUser) {
+        Optional<User> existingUserOptional = userRepository.findById(id);
+        if (existingUserOptional.isPresent()) {
+            User existingUser = existingUserOptional.get();
+
+            existingUser.setUsername(editedUser.getUsername());
+            existingUser.setPassword(editedUser.getPassword());
+            existingUser.setTasks(editedUser.getTasks());
+            existingUser.setTeams(editedUser.getTeams());
+            existingUser.setRoles(editedUser.getRoles());
+
+            userRepository.save(existingUser);
+        }
     }
 }

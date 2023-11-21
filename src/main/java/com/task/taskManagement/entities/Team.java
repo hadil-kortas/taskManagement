@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -17,8 +19,9 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     @ManyToMany(mappedBy = "teams")
-    private List<User> users ;
+    private Set<User> users = new HashSet<>();// if the team can have multiple users, to ensure uniqueness of users within the team.
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<Task> tasks;
 

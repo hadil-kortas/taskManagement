@@ -7,7 +7,8 @@ import java.util.List;
 public interface IServiceTaskStatus {
     public void saveTaskStatus(TaskStatus taskStatus);
     public List<TaskStatus> getAllTaskStatus();
-    public List<TaskStatus> getTaskStatusByMc(String mc);
+
     public void deleteTaskStatus(Long id);
     public TaskStatus getTaskStatus (Long id);
+    public void editTaskStatus(Long id, TaskStatus editedTaskStatus);
 }

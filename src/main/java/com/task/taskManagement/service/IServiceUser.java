@@ -11,4 +11,5 @@ public interface IServiceUser {
     public List<User> getUserByMc(String mc);
     public void deleteUser(Long id);
     public User getUser (Long id);
+    public void editUser (Long id, User editedUser);
 }

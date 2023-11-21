@@ -11,5 +11,6 @@ public interface IServiceRole {
     public List<Role> getRoleByMc(String mc);
     public void deleteRole(Long id);
     public Role getRole (Long id);
+    public void editRole(Long id, Role editedRole);
 
 }

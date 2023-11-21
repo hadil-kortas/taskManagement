@@ -20,13 +20,13 @@ public class Task {
     private String title;
     private String description;
     private LocalDate dueDate;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "task_status_id")
     private TaskStatus taskStatus;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "team_id")
     private Team team;
 
