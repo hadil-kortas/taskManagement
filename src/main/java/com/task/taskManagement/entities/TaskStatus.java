@@ -21,5 +21,6 @@ public class TaskStatus {
     @OneToMany(mappedBy = "taskStatus")
     private List<Task> tasks;
     private Statusenum status;
+    private Integer progressPercentage;
 
 }

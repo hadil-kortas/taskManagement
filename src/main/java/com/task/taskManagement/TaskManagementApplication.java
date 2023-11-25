@@ -41,6 +41,18 @@ public class TaskManagementApplication implements CommandLineRunner {
 		user2.setPassword("onsons");
 		userRepository.save(user2);
 
+		User user3 = new User();
+		user3.setUsername("achour_mariem");
+		user3.setPassword("achourmariem");
+		userRepository.save(user3);
+
+
+		User user4 = new User();
+		user4.setUsername("jhon_jhon");
+		user4.setPassword("jhon");
+		userRepository.save(user4);
+
+
 
 		Team team1 = new Team();
 		team1.setName("A");
@@ -48,39 +60,40 @@ public class TaskManagementApplication implements CommandLineRunner {
 		team1.getUsers().add(user2);
 		teamRepository.save(team1);
 
+		Team team2 = new Team();
+		team2.setName("B");
+		team2.getUsers().add(user3);
+		team2.getUsers().add(user4);
+		teamRepository.save(team2);
+
 		// Example of creating a TaskStatue
 
 		TaskStatus taskStatus = new TaskStatus();
 		taskStatus.setStatusName("TODO");
 		taskStatus.setStatus(Statusenum.TODO);
+		taskStatus.setProgressPercentage(10);
 		taskStatusRepository.save(taskStatus);
 
 
 		// Example of creating a new task
-		Task task = new Task();
-		task.setTitle("Create an admin dashboard");
-		task.setDescription("admin dashboard");
-
-		Team team = teamRepository.findById(1L).orElse(null);
-		if (team != null) {
-			task.setTeam(team1);
-		} else {
-			// Handle the case where the team with the given ID is not found
-			// You might want to log an error or throw an exception
-			System.out.println("Team not found with ID 1");
-		}
-		LocalDate d = LocalDate.of(2022,11,12);
-		task.setDueDate(d);
-		taskRepository.save(task);
 
 		Task task1 = Task.builder()
 				.title("Implement Feature X")
 				.description("Implement a new feature in the system")
 				.dueDate(LocalDate.of(2022,11,13))
 				.team(team1)
-				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).build())
+				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).progressPercentage(50).build())
 				.build();
 		taskRepository.save(task1);
+
+		Task task2 = Task.builder()
+				.title("Implement Admin dashboard")
+				.description("Implement a new feature in the system")
+				.dueDate(LocalDate.of(2022,11,14))
+				.team(team2)
+				.taskStatus(TaskStatus.builder().statusName("DONE").status(Statusenum.DONE).progressPercentage(100).build())
+				.build();
+		taskRepository.save(task2);
 
 
 
