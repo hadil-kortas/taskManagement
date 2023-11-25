@@ -48,16 +48,54 @@ public class TaskManagementApplication implements CommandLineRunner {
 		team1.getUsers().add(user2);
 		teamRepository.save(team1);
 
+		// Example of creating a TaskStatue
+
+		TaskStatus taskStatus = new TaskStatus();
+		taskStatus.setStatusName("TODO");
+		taskStatus.setStatus(Statusenum.TODO);
+		taskStatusRepository.save(taskStatus);
+
 
 		// Example of creating a new task
 		Task task = new Task();
 		task.setTitle("Create an admin dashboard");
 		task.setDescription("admin dashboard");
 
-		teamRepository.findById(1L).get();
+		Team team = teamRepository.findById(1L).orElse(null);
+		if (team != null) {
+			task.setTeam(team1);
+		} else {
+			// Handle the case where the team with the given ID is not found
+			// You might want to log an error or throw an exception
+			System.out.println("Team not found with ID 1");
+		}
 		LocalDate d = LocalDate.of(2022,11,12);
 		task.setDueDate(d);
 		taskRepository.save(task);
 
+		Task task1 = Task.builder()
+				.title("Implement Feature X")
+				.description("Implement a new feature in the system")
+				.dueDate(LocalDate.of(2022,11,13))
+				.team(team1)
+				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).build())
+				.build();
+		taskRepository.save(task1);
+
+
+
+		// Example of creating a Role
+
+		Role role = new Role();
+		role.setRoleName("Admin");
+		role.getUsers().add(user);
+		roleRepository.save(role);
+
+
+
+
+	};
+
+
+
 	}
-}
