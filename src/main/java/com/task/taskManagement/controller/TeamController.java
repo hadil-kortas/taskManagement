@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,10 +25,12 @@ public class TeamController {
     ServiceTaskStatus serviceTaskStatus;
 
     @GetMapping("/admin")
-    public String getAllTeams (Model m)
+    public String getAllTeams (Model m,
+                               @RequestParam(name = "mc", defaultValue = "") String mc)
     {
-        List<Team> teams=serviceTeam.getAllTeams();
+        List<Team> teams=serviceTeam.getTeamByMc(mc);
         m.addAttribute("teams", teams);
+        m.addAttribute("mc", mc);
 
         return "vue";
     }
