@@ -85,6 +85,14 @@ public class TaskManagementApplication implements CommandLineRunner {
 				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).progressPercentage(50).build())
 				.build();
 		taskRepository.save(task1);
+		/*Task task3 = Task.builder()
+				.title("Implement Feature Y")
+				.description("Implement a new feature in the system")
+				.dueDate(LocalDate.of(2022,11,13))
+				.team(team1)
+				.taskStatus(TaskStatus.builder().statusName("All Most Done").status(Statusenum.ALLMOSTDONE).progressPercentage(75).build())
+				.build();
+		taskRepository.save(task3);*/
 
 		Task task2 = Task.builder()
 				.title("Implement Admin dashboard")

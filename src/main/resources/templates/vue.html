@@ -17,8 +17,8 @@
         <div class="container">
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">List of Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#" style="color: white">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: white">List of Tasks</a></li>
                 </ul>
             </div>
         </div>
@@ -56,36 +56,31 @@
         <td th:text="${t.id}" ></td>
         <td th:text="${t.name}" ></td>
         <td>
-            <ul>
-                <li th:each="user : ${t.users}" th:text="${user.username}"></li>
-            </ul>
+                <div th:each="user : ${t.users}" th:text="${user.username}"></div>
         </td>
         <td>
-            <ul>
-                <li th:each="task : ${t.tasks}">
+                <div th:each="task : ${t.tasks}">
                     <span th:text="${task.title}"></span>
-                </li>
-            </ul>
+                </div>
         </td>
         <td>
-            <ul>
-                <li th:each="task : ${t.tasks}">
+                <div th:each="task : ${t.tasks}">
                     <span th:text="${task.taskStatus.statusName}"></span>
-                </li>
-            </ul>
+                </div>
         </td>
         <td>
-            <div class="col-md-6">
-                <div class="progress blue">
-                    <span class="progress-bar" th:each="task : ${t.tasks}"
-                         role="progressbar" th:style="'width: ' + ${task.taskStatus.progressPercentage} + '%'"
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <div class="progress-bar" th:each="task : ${t.tasks}" th:style="'--progress: ' + ${task.taskStatus.progressPercentage} + '%'"
                          th:aria-valuenow="${task.taskStatus.progressPercentage}"
                          th:aria-valuemin="0" th:aria-valuemax="100">
-
-                    </span>
+                        <div class="progress-value" th:text="${task.taskStatus.progressPercentage + '%'}"></div>
+                    </div>
                 </div>
             </div>
         </td>
+
+
 
     </tr>
     </tbody>
