@@ -4,6 +4,8 @@ import com.task.taskManagement.dao.TaskRepository;
 import com.task.taskManagement.entities.Role;
 import com.task.taskManagement.entities.Task;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +29,8 @@ public class ServiceTask implements IServiceTask{
     }
 
     @Override
-    public List<Task> getTaskByMc(String mc) {
-        return taskRepository.findByTitleContains(mc);
+    public Page<Task> getTaskByMc(String mc, Pageable t) {
+        return taskRepository.findByTitleContains(mc, t);
     }
 
     @Override

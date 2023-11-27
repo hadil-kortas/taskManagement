@@ -4,6 +4,8 @@ import com.task.taskManagement.dao.TeamRepository;
 import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.Team;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +28,8 @@ public class ServiceTeam implements IServiceTeam{
     }
 
     @Override
-    public List<Team> getTeamByMc(String mc) {
-        return teamRepository.findByNameContains(mc);
+    public Page<Team> getTeamByMc(String mc, Pageable t) {
+        return teamRepository.findByNameContains(mc, t);
     }
 
     @Override

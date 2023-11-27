@@ -42,15 +42,20 @@ public class TaskManagementApplication implements CommandLineRunner {
 		userRepository.save(user2);
 
 		User user3 = new User();
-		user3.setUsername("achour_mariem");
-		user3.setPassword("achourmariem");
+		user3.setUsername("Akhref_Akhnef");
+		user3.setPassword("Akhref_Akhnef");
 		userRepository.save(user3);
 
 
 		User user4 = new User();
-		user4.setUsername("jhon_jhon");
-		user4.setPassword("jhon");
+		user4.setUsername("marven_yamarwen");
+		user4.setPassword("marven_yamarwen");
 		userRepository.save(user4);
+
+		User user5 = new User();
+		user5.setUsername("khanin_el7a9ir");
+		user5.setPassword("khaninel7a9ir");
+		userRepository.save(user5);
 
 
 
@@ -61,10 +66,18 @@ public class TaskManagementApplication implements CommandLineRunner {
 		teamRepository.save(team1);
 
 		Team team2 = new Team();
-		team2.setName("B");
+		team2.setName("E Rojla");
 		team2.getUsers().add(user3);
 		team2.getUsers().add(user4);
+		team2.getUsers().add(user5);
 		teamRepository.save(team2);
+
+		Team team3 = new Team();
+		team3.setName("Backend Team");
+		team3.getUsers().add(user);
+		team3.getUsers().add(user2);
+		team3.getUsers().add(user5);
+		teamRepository.save(team3);
 
 		// Example of creating a TaskStatue
 
@@ -85,14 +98,14 @@ public class TaskManagementApplication implements CommandLineRunner {
 				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).progressPercentage(50).build())
 				.build();
 		taskRepository.save(task1);
-		/*Task task3 = Task.builder()
-				.title("Implement Feature Y")
-				.description("Implement a new feature in the system")
-				.dueDate(LocalDate.of(2022,11,13))
-				.team(team1)
+		Task task3 = Task.builder()
+				.title("Authentication")
+				.description("Implement authentication and authorization")
+				.dueDate(LocalDate.of(2022,12,13))
+				.team(team3)
 				.taskStatus(TaskStatus.builder().statusName("All Most Done").status(Statusenum.ALLMOSTDONE).progressPercentage(75).build())
 				.build();
-		taskRepository.save(task3);*/
+		taskRepository.save(task3);
 
 		Task task2 = Task.builder()
 				.title("Implement Admin dashboard")
