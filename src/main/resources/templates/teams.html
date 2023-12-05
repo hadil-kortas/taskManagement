@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <title>Admin View</title>
 </head>
-<body>
+<body data-bs-theme="dark">
 <header>
     <nav id="mainNav" class="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light">
         <div class="container">
@@ -64,13 +64,13 @@
     <tbody>
     <tr th:each="t:${teams}">
 
-        <td th:text="${t.id}" ></td>
+        <td  th:text="${t.id}" ></td>
         <td th:text="${t.name}" ></td>
         <td>
                 <div th:each="user : ${t.users}" th:text="${user.username}"></div>
         </td>
         <td>
-                <div th:each="task : ${t.tasks}">
+                <div th:each="task : ${t.tasks}"> <!--if task>0 twli kol task twali span tekhou border bottom -->
                     <span th:text="${task.title}"></span>
                 </div>
         </td>
@@ -81,7 +81,7 @@
         </td>
         <td>
             <div class="row d-flex justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-8 d-flex gap-2 justify-content-center">
                     <div class="progress-bar" th:each="task : ${t.tasks}" th:style="'--progress: '   + ${task.taskStatus.progressPercentage} + '%'"
                          th:aria-valuenow="${task.taskStatus.progressPercentage}"
                          th:aria-valuemin="0" th:aria-valuemax="100">

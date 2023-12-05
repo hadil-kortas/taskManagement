@@ -6,7 +6,8 @@
 }
 
     body{
-        background-color: #8f1778;
+        /*background-color: #121212;*/
+        background:#292929 !important;
     }
 
     .mt-100{
@@ -20,7 +21,10 @@
 
 
 
-    .progress-bar {
+
+
+.progress-bar {
+
         position: relative;
         width: 100px;
         height: 100px;
@@ -48,6 +52,11 @@
 
     .table {
         border-radius: 20%;
+
+    }
+
+    td{
+
     }
 
 
