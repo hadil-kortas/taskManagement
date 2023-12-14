@@ -26,6 +26,7 @@
 </header>
 
 <div class="card-body text-center px-4 py-5 px-md-5">
+    <a th:href="@{/admin/addTeam}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Team</a>
 
     <form style=" display: flex; margin-top: 20px;flex-direction: row; margin-right: 50px " class="form-inline" th:action="@{/admin/teams}" method="get">
 
@@ -82,10 +83,12 @@
         <td>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8 d-flex gap-2 justify-content-center">
-                    <div class="progress-bar" th:each="task : ${t.tasks}" th:style="'--progress: '   + ${task.taskStatus.progressPercentage} + '%'"
-                         th:aria-valuenow="${task.taskStatus.progressPercentage}"
-                         th:aria-valuemin="0" th:aria-valuemax="100">
-                        <div class="progress-value" th:text="${task.taskStatus.progressPercentage + '%'}"></div>
+                    <div class="progress-container">
+                        <div class="progress-bar" th:each="task : ${t.tasks}" th:style="'--progress: '   + ${task.taskStatus.progressPercentage} + '%'"
+                             th:aria-valuenow="${task.taskStatus.progressPercentage}"
+                             th:aria-valuemin="0" th:aria-valuemax="100">
+                            <div class="progress-value" th:text="${task.taskStatus.progressPercentage + '%'}"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Example;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @SpringBootApplication
@@ -84,7 +86,7 @@ public class TaskManagementApplication implements CommandLineRunner {
 		TaskStatus taskStatus = new TaskStatus();
 		taskStatus.setStatusName("TODO");
 		taskStatus.setStatus(Statusenum.TODO);
-		taskStatus.setProgressPercentage(10);
+		taskStatus.setProgressPercentage(0);
 		taskStatusRepository.save(taskStatus);
 
 
@@ -93,7 +95,7 @@ public class TaskManagementApplication implements CommandLineRunner {
 		Task task1 = Task.builder()
 				.title("Implement Feature X")
 				.description("Implement a new feature in the system")
-				.dueDate(LocalDate.of(2022,11,13))
+				.dueDate(LocalDateTime.of(2023,11,13,12,00))
 				.team(team1)
 				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).progressPercentage(50).build())
 				.build();
@@ -101,7 +103,7 @@ public class TaskManagementApplication implements CommandLineRunner {
 		Task task3 = Task.builder()
 				.title("Authentication")
 				.description("Implement authentication and authorization")
-				.dueDate(LocalDate.of(2022,12,13))
+				.dueDate(LocalDateTime.of(2022,12,13,18,25))
 				.team(team3)
 				.taskStatus(TaskStatus.builder().statusName("All Most Done").status(Statusenum.ALLMOSTDONE).progressPercentage(75).build())
 				.build();
@@ -110,19 +112,11 @@ public class TaskManagementApplication implements CommandLineRunner {
 		Task task2 = Task.builder()
 				.title("Implement Admin dashboard")
 				.description("Implement a new feature in the system")
-				.dueDate(LocalDate.of(2022,11,14))
+				.dueDate(LocalDateTime.of(2022,11,14,15,30))
 				.team(team2)
 				.taskStatus(TaskStatus.builder().statusName("DONE").status(Statusenum.DONE).progressPercentage(100).build())
 				.build();
 		taskRepository.save(task2);
-		Task task4 = Task.builder()
-				.title("Implement User dashboard")
-				.description("Implement a new feature in the system")
-				.dueDate(LocalDate.of(2022,11,16))
-				.team(team1)
-				.taskStatus(TaskStatus.builder().statusName("DONE").status(Statusenum.DONE).progressPercentage(100).build())
-				.build();
-		taskRepository.save(task4);
 
 
 

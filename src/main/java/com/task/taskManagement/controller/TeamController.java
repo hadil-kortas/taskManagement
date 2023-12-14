@@ -39,4 +39,13 @@ public class TeamController {
 
         return "teams";
     }
+
+    @GetMapping("/admin/addTeam")
+    public String addTeam(Model m)
+    {
+        m.addAttribute("team", new Team());
+        m.addAttribute("users", serviceUser.getAllUsers());
+        m.addAttribute("tasks", serviceTask.getAllTasks());
+        return "addTeam";
+    }
 }

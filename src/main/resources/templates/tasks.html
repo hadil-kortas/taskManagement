@@ -16,7 +16,7 @@
 
 <div class="card-body text-center px-4 py-5 px-md-5">
     <a th:href="@{/admin/teams}" class="btn btn-outline-light fa fa-arrow-left" style="position: absolute; top: 10px; left: 10px;z-index: 9999;" ></a>
-    <a th:href="@{/addProduct}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Task</a>
+    <a th:href="@{/addTask}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Task</a>
 
     <form style=" display: flex; margin-top: 20px;flex-direction: row; margin-right: 50px " class="form-inline" th:action="@{/admin/tasks}" method="get">
 
@@ -45,7 +45,7 @@
                 Team
             </th>
             <th scope="col">
-                Date
+                Deadline
             </th>
             <th scope="col">
                 Task Status
@@ -68,8 +68,21 @@
                 </div>
             </td>
             <td th:text="${t.dueDate}"></td>
-            <!-- <td th:text="${t.taskStatus}"></td>
-            <td th:text="${t.taskStatus.progressPercentage}"></td> -->
+            <td>
+                <span th:text="${t.taskStatus.statusName}"></span>
+            </td>
+
+            <td>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 d-flex gap-2 justify-content-center">
+                            <div class="progress-container">
+                                    <div class="progress-bar" th:style="'--progress: ' + ${t.taskStatus.progressPercentage} + '%'">
+                                        <div class="progress-value" th:text="${t.taskStatus.progressPercentage + '%'}"></div>
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+            </td>
 
         </tr>
         </tbody>

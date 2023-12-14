@@ -23,18 +23,18 @@ public class User {
     private String username;
     private String password;
     @ManyToMany
-    @JoinTable(
+    /*@JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    )*/
     private Set<Role> roles = new HashSet<>();
     @ManyToMany
-    @JoinTable(
+    /*@JoinTable(
             name = "team_user",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
-    )
+    )*/
     private Set<Team> teams = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> tasks;
