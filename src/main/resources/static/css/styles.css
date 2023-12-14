@@ -43,6 +43,7 @@
 
     .progress-value {
         font-weight: 600;
+        color: #292929;
     }
 
     .table-striped {
@@ -55,7 +56,8 @@
 
     }
 
-    td{
+    .page-link{
+        background-color: whitesmoke;
 
     }
 

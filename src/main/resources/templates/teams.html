@@ -17,7 +17,7 @@
         <div class="container">
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="" style="color: white">List of Teams</a></li>
+                    <li class="nav-item"><a class="nav-link active " href="" style="color: white; opacity: 0.5;">List of Teams</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/admin/tasks}" style="color: white">List of Tasks</a></li>
                 </ul>
             </div>
@@ -99,7 +99,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination ">
             <li class="page-item"  >
-                <a class="page-link" th:href="@{/admin/teams(mc=${mc}, page=${currentpage - 1})}" aria-label="Previous" style="color: black">
+                <a class="btn btn-light" th:href="@{/admin/teams(mc=${mc}, page=${currentpage - 1})}" aria-label="Previous" style="color: black">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -107,7 +107,7 @@
 
 
             <li class="page-item " style="position: absolute; right: 10px; margin-right: 36px">
-                <a class="page-link" th:href="@{/admin/teams(mc=${mc}, page=${currentpage + 1})}" aria-label="Next" style="color: black">
+                <a class="btn btn-light" th:href="@{/admin/teams(mc=${mc}, page=${currentpage + 1})}" aria-label="Next" style="color: black">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>

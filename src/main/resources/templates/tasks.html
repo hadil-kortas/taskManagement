@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <title>Admin View</title>
 </head>
-<body>
+<body data-bs-theme="dark">
 
 
 <div class="card-body text-center px-4 py-5 px-md-5">
@@ -47,6 +47,12 @@
             <th scope="col">
                 Date
             </th>
+            <th scope="col">
+                Task Status
+            </th>
+            <th scope="col">
+                Progress
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -62,9 +68,8 @@
                 </div>
             </td>
             <td th:text="${t.dueDate}"></td>
-
-
-
+            <!-- <td th:text="${t.taskStatus}"></td>
+            <td th:text="${t.taskStatus.progressPercentage}"></td> -->
 
         </tr>
         </tbody>
