@@ -46,6 +46,10 @@
         </th>
 
         <th scope="col">
+            Team photo
+        </th>
+
+        <th scope="col">
             Name
         </th>
         <th scope="col">
@@ -66,6 +70,13 @@
     <tr th:each="t:${teams}">
 
         <td  th:text="${t.id}" ></td>
+        <td th:if="${t.photo=='' || t.photo==null}">
+            <img src="/photos/inconnu.jpg" width="60" height="60">
+        </td>
+        <td th:unless="${t.photo=='' || t.photo==null}">
+            <img th:src="${'/photos/'+t.photo}" width="60" height="60">
+
+        </td>
         <td th:text="${t.name}" ></td>
         <td>
                 <div th:each="user : ${t.users}" th:text="${user.username}"></div>

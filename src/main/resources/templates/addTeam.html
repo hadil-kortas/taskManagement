@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <!-- Bootstrap CSS -->
@@ -11,8 +11,8 @@
 </head>
 <body data-bs-theme="dark">
 
-<div class="container mt-5">
-    <div class="card">
+<div class="container mt-5" style="padding: 20px">
+    <div class="card" style="padding-bottom: 40px">
         <div class="card-header text-white" style="background-color: #212529"><h3>Add Team </h3></div>
         <form method="post" th:action="@{/admin/addTeam}" enctype="multipart/form-data">
             <div class="form-group">
@@ -33,6 +33,16 @@
                     <option value="" selected="selected" disabled hidden>Select Task</option>
                     <option th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.title}"></option>
                 </select>
+            </div>
+
+            <div>
+                Add Photo:
+                <input type="file" accept="image/*"  name="image">
+            </div>
+
+            <div class="text-center mt-5" >
+                <a th:href="@{/admin/teams}" class="btn btn-outline-light">Cancel</a>
+                <button  type="submit" class="btn btn-outline-light">Save Team</button>
             </div>
 
 

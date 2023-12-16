@@ -1,6 +1,9 @@
 package com.task.taskManagement.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,10 +23,17 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
     private String name;
+
     @ManyToMany
+
     private Set<User> users = new HashSet<>();// if the team can have multiple users, to ensure uniqueness of users within the team.
+
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     List<Task> tasks;
+
+    private String photo;
 
 }
