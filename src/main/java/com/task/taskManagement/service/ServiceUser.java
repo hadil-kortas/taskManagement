@@ -1,13 +1,13 @@
 package com.task.taskManagement.service;
 
 import com.task.taskManagement.dao.UserRepository;
-import com.task.taskManagement.entities.Team;
 import com.task.taskManagement.entities.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -39,6 +39,11 @@ public class ServiceUser implements IServiceUser{
     @Override
     public User getUser(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<User> getUsersByIds(Set<Long> userIds) {
+        return userRepository.findByIdIn(userIds);
     }
 
     @Override

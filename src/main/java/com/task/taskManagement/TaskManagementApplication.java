@@ -31,106 +31,37 @@ public class TaskManagementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// Example of creating a new user
-		User user = new User();
-		user.setUsername("hadil_kortas");
-		user.setPassword("hadil123");
-		userRepository.save(user);
 
 
-		User user2 = new User();
-		user2.setUsername("ons_belhaj");
-		user2.setPassword("onsons");
-		userRepository.save(user2);
+		// Example of creating a new team
+		Team team5 = new Team();
+		team5.setName("B");
 
-		User user3 = new User();
-		user3.setUsername("Akhref_Akhnef");
-		user3.setPassword("Akhref_Akhnef");
-		userRepository.save(user3);
+		User user1 = new User();
+		user1.setUsername("dffdsfsd");
+		user1.setPassword("sdfsdfsf");
+		team5.getUsers().add(user1);
 
+		User user6 = new User();
+		user6.setUsername("zeaze");
+		user6.setPassword("zeaze");
+		team5.getUsers().add(user6);
 
-		User user4 = new User();
-		user4.setUsername("marven_yamarwen");
-		user4.setPassword("marven_yamarwen");
-		userRepository.save(user4);
-
-		User user5 = new User();
-		user5.setUsername("khanin_el7a9ir");
-		user5.setPassword("khaninel7a9ir");
-		userRepository.save(user5);
-
-
-
-		Team team1 = new Team();
-		team1.setName("A");
-		team1.getUsers().add(user);
-		team1.getUsers().add(user2);
-		teamRepository.save(team1);
-
-		Team team2 = new Team();
-		team2.setName("E Rojla");
-		team2.getUsers().add(user3);
-		team2.getUsers().add(user4);
-		team2.getUsers().add(user5);
-		teamRepository.save(team2);
-
-		Team team3 = new Team();
-		team3.setName("Backend Team");
-		team3.getUsers().add(user);
-		team3.getUsers().add(user2);
-		team3.getUsers().add(user5);
-		teamRepository.save(team3);
-
-		// Example of creating a TaskStatue
-
-		TaskStatus taskStatus = new TaskStatus();
-		taskStatus.setStatusName("TODO");
-		taskStatus.setStatus(Statusenum.TODO);
-		taskStatus.setProgressPercentage(0);
-		taskStatusRepository.save(taskStatus);
-
-
-		// Example of creating a new task
-
-		Task task1 = Task.builder()
-				.title("Implement Feature X")
-				.description("Implement a new feature in the system")
-				.dueDate(LocalDateTime.of(2023,11,13,12,00))
-				.team(team1)
-				.taskStatus(TaskStatus.builder().statusName("in progress").status(Statusenum.INPROGRESS).progressPercentage(50).build())
-				.build();
-		taskRepository.save(task1);
-		Task task3 = Task.builder()
-				.title("Authentication")
-				.description("Implement authentication and authorization")
-				.dueDate(LocalDateTime.of(2022,12,13,18,25))
-				.team(team3)
-				.taskStatus(TaskStatus.builder().statusName("All Most Done").status(Statusenum.ALLMOSTDONE).progressPercentage(75).build())
-				.build();
-		taskRepository.save(task3);
-
-		Task task2 = Task.builder()
-				.title("Implement Admin dashboard")
-				.description("Implement a new feature in the system")
-				.dueDate(LocalDateTime.of(2022,11,14,15,30))
-				.team(team2)
-				.taskStatus(TaskStatus.builder().statusName("DONE").status(Statusenum.DONE).progressPercentage(100).build())
-				.build();
-		taskRepository.save(task2);
-
-
-
-		// Example of creating a Role
-
-		Role role = new Role();
-		role.setRoleName("Admin");
-		role.getUsers().add(user);
-		roleRepository.save(role);
+		Task task5 = new Task();
+		task5.setTitle("jdlskdjlsqd");
+		task5.setTeam(team5);
+		task5.setDescription("fqsdqddqdqddqsd");
+		task5.setDueDate(LocalDateTime.of(2023,9,25,16,30));
+		task5.setTaskStatus(TaskStatus.builder().statusName("to do").status(Statusenum.TODO).progressPercentage(0).build());
+		team5.getTasks().add(task5);
+		teamRepository.save(team5);
 
 
 
 
-	};
+
+
+	}
 
 
 

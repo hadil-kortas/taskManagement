@@ -21,17 +21,20 @@
                 <span class="text-danger" th:errors="${team.name}"></span>
             </div>
             <div class="form-group mt-3">
-                <label for="participant">Participants:</label>
-                <select class="form-control" id="participant" name="participant" multiple="multiple">
-                    <option value="" selected="selected" disabled hidden>Select participants</option>
-                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                <label for="participants">Participants:</label>
+                <select class="form-control" id="participants" name="participants" multiple="multiple">
+                    <option selected="selected" hidden="">Select participants</option>
+                    <option th:each="u:${users}" th:value="${u.id}" th:text="${u.username}"
+                            th:selected="${team.users.contains(u)}"></option>
                 </select>
             </div>
+
             <div class="form-group mt-3">
-                <label for="task">Task:</label>
-                <select class="form-control" id="task" name="task">
-                    <option value="" selected="selected" disabled hidden>Select Task</option>
-                    <option th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.title}"></option>
+                <label for="tasks">Task:</label>
+                <select class="form-control" id="tasks" name="tasks">
+                    <option selected="selected" hidden="">Select Task</option>
+                    <option th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.title}"
+                            th:selected="${team.tasks.contains(task)}"></option>
                 </select>
             </div>
 

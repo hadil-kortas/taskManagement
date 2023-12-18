@@ -1,7 +1,9 @@
 package com.task.taskManagement.controller;
 
 
+import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.Team;
+import com.task.taskManagement.entities.User;
 import com.task.taskManagement.service.ServiceTask;
 import com.task.taskManagement.service.ServiceTaskStatus;
 import com.task.taskManagement.service.ServiceTeam;
@@ -20,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -50,14 +57,26 @@ public class TeamController {
     @GetMapping("/admin/addTeam")
     public String addTeam(Model m)
     {
-        m.addAttribute("team", new Team());
         m.addAttribute("users", serviceUser.getAllUsers());
         m.addAttribute("tasks", serviceTask.getAllTasks());
+        m.addAttribute("team", new Team());
+
         return "addTeam";
     }
 
     @PostMapping("/admin/addTeam")
     public String saveTeam(@ModelAttribute Team t, Model m, @RequestParam("image") MultipartFile mf) throws IOException {
+        m.addAttribute("users", serviceUser.getAllUsers());
+        m.addAttribute("tasks", serviceTask.getAllTasks());
+
+        // Set the selected users and tasks for the team
+        Set<User> selectedUsers = new HashSet<>(serviceUser.getUsersByIds(t.getUsers().stream().map(User::getId).collect(Collectors.toSet())));
+        Set<Task> selectedTasks = new HashSet<>(serviceTask.getTasksByIds(t.getTasks().stream().map(Task::getId).collect(Collectors.toSet())));
+
+        t.setUsers(selectedUsers);
+        t.setTasks(new ArrayList<>(selectedTasks));
+
+
         serviceTeam.saveTeam(t,mf);
         return "redirect:/admin/teams";
     }

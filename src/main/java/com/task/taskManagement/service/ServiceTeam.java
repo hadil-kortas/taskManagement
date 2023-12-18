@@ -1,7 +1,10 @@
 package com.task.taskManagement.service;
 
 import com.task.taskManagement.dao.TeamRepository;
+import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.Team;
+import com.task.taskManagement.entities.User;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -16,13 +19,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class ServiceTeam implements IServiceTeam{
     private TeamRepository teamRepository;
+    ServiceUser serviceUser;
+    ServiceTask serviceTask;
 
     @Override
+    @Transactional
     public void saveTeam(Team t, MultipartFile mf) throws IOException{
 
         if (!mf.isEmpty())
@@ -31,6 +38,7 @@ public class ServiceTeam implements IServiceTeam{
             String image=saveImage(mf);
             t.setPhoto(image);
         }
+
 
         teamRepository.save(t);
 

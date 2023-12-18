@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,12 +28,12 @@ public class Team {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 
     private Set<User> users = new HashSet<>();// if the team can have multiple users, to ensure uniqueness of users within the team.
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    List<Task> tasks;
+    List<Task> tasks = new ArrayList<>();
 
     private String photo;
 

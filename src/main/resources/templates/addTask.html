@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+</head>
+<body data-bs-theme="dark">
+
+<div class="container mt-5" style="padding: 20px">
+    <div class="card" style="padding-bottom: 40px">
+        <div class="card-header text-white" style="background-color: #212529"><h3>Add Task </h3></div>
+        <form method="post" th:action="@{/admin/addTask}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Add task title" th:value="${task.title}" >
+            </div>
+
+            <div class="form-group">
+                <label for="title">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Add task description" th:text="${task.description}" rows="5"></textarea>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="team">Team:</label>
+                <select class="form-control" id="team" name="team">
+                    <option value="" selected="selected" disabled hidden>Select a Team</option>
+                    <option th:each="t:${teams}"  th:value="${t.id}" th:text="${t.name}"
+                            th:selected="${task.id!=null && task.team.id==t.id}"></option>
+                </select>
+                <span class="text-danger" th:errors="${task.team}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="datetime-local" class="form-control" id="deadline" name="deadline" th:value="${task.dueDate != null ? task.dueDate.format('yyyy-MM-ddTHH:mm') : ''}" />
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="taskstatus">Task Status:</label>
+                <select class="form-control" id="taskstatus" name="taskstatus">
+                    <option value="" selected="selected" disabled hidden>Select Task Status</option>
+                    <option th:each="t:${taskstatus}"  th:value="${t.id}" th:text="${t.status}"
+                            th:selected="${task.id!=null && task.taskStatus.id==t.id}"></option>
+                </select>
+                <span class="text-danger" th:errors="${task.team}"></span>
+            </div>
+
+            <div class="text-center mt-5" >
+                <a th:href="@{/admin/tasks}" class="btn btn-outline-light">Cancel</a>
+                <button  type="submit" class="btn btn-outline-light">Save Task</button>
+            </div>
+
+        </form>
+
+
+
+    </div>
+
+</div>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

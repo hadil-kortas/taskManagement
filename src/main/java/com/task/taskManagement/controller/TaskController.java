@@ -2,6 +2,7 @@ package com.task.taskManagement.controller;
 
 import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.Team;
+import com.task.taskManagement.entities.User;
 import com.task.taskManagement.service.ServiceTask;
 import com.task.taskManagement.service.ServiceTaskStatus;
 import com.task.taskManagement.service.ServiceTeam;
@@ -12,7 +13,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -38,5 +48,28 @@ public class TaskController {
 
 
         return "tasks";
+    }
+
+    @GetMapping("/admin/addTask")
+    public String addTask(Model m)
+    {
+
+        m.addAttribute("teams", serviceTeam.getAllTeams());
+        m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
+        m.addAttribute("task", new Task());
+
+        return "addTask";
+    }
+
+    @PostMapping("/admin/addTask")
+    public String saveTask(@ModelAttribute Task t, Model m) throws IOException {
+
+        m.addAttribute("teams", serviceTeam.getAllTeams());
+        m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
+
+
+
+        serviceTask.saveTask(t);
+        return "redirect:/admin/tasks";
     }
 }

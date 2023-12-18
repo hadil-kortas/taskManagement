@@ -13,10 +13,23 @@
 </head>
 <body data-bs-theme="dark">
 
+<header>
+    <nav id="mainNav" class="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light">
+        <div class="container">
+            <div id="navcol-1" class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active " href="" style="color: white; opacity: 0.5;">List of Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/admin/teams}" style="color: white">List of Teams</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
 
 <div class="card-body text-center px-4 py-5 px-md-5">
-    <a th:href="@{/admin/teams}" class="btn btn-outline-light fa fa-arrow-left" style="position: absolute; top: 10px; left: 10px;z-index: 9999;" ></a>
-    <a th:href="@{/addTask}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Task</a>
+
+    <a th:href="@{/admin/addTask}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Task</a>
 
     <form style=" display: flex; margin-top: 20px;flex-direction: row; margin-right: 50px " class="form-inline" th:action="@{/admin/tasks}" method="get">
 
