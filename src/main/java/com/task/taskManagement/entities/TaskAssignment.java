@@ -6,20 +6,30 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Role {
+
+public class TaskAssignment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String roleName;
-    @ManyToMany
-    private Set<User> users = new HashSet<>();
 
+    @OneToOne
+    private Task task;
+
+    @ManyToOne
+    private Participant participant;
+
+    @ManyToOne
+    private TaskStatus taskStatus;
+
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }
+

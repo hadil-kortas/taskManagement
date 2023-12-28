@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Add Participant</title>
+</head>
+<body data-bs-theme="dark">
+
+<div class="container mt-5" style="padding: 20px">
+    <div class="card" style="max-width: 600px; margin: auto;">
+        <div class="card-header text-white"><h3>Add Participant </h3></div>
+        <div class="card-body">
+            <form method="post" th:action="@{/addParticipant}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Add Firstname" th:value="${participant.firstname}">
+                    <span class="text-danger" th:errors="${participant.firstname}"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Add Lastname" th:value="${participant.lastname}">
+                    <span class="text-danger" th:errors="${participant.lastname}"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" th:value="${participant.username}">
+                    <span class="text-danger" th:errors="${participant.username}"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="job">Job</label>
+                    <input type="text" class="form-control" id="job" name="job" placeholder="Enter Job" th:value="${participant.job}">
+                    <span class="text-danger" th:errors="${participant.job}"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="phone">Contact</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone" th:value="${participant.phone}">
+                    <span class="text-danger" th:errors="${participant.phone}"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" th:value="${participant.email}">
+                    <span class="text-danger" th:errors="${participant.email}"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" th:value="${participant.password}">
+                    <span class="text-danger" th:errors="${participant.password}"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" th:value="${participant.confirmPassword}">
+                    <span class="text-danger" th:errors="${participant.confirmPassword}"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    Add image:
+                    <input type="file" accept="image/*"  name="image">
+                </div>
+
+                <div class="text-center mt-5" >
+                    <a th:href="@{/participants}" class="btn btn-outline-light">Cancel</a>
+                    <button  type="submit" class="btn btn-outline-light">Save Participant</button>
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

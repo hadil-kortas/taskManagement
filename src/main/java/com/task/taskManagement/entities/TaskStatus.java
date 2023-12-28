@@ -19,7 +19,7 @@ public class TaskStatus {
     private Long id;
     private String statusName;
     @OneToMany(mappedBy = "taskStatus")
-    private List<Task> tasks;
+    private List<TaskAssignment> taskAssignements;
     private Statusenum status;
     private Integer progressPercentage;
 

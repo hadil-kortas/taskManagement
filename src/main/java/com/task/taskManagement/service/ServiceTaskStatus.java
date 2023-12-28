@@ -44,7 +44,7 @@ public class ServiceTaskStatus implements IServiceTaskStatus {
             TaskStatus existingTaskStatus = existingTaskStatusOptional.get();
 
             existingTaskStatus.setStatusName(editedTaskStatus.getStatusName());
-            existingTaskStatus.setTasks(editedTaskStatus.getTasks());
+            existingTaskStatus.setTaskAssignements(editedTaskStatus.getTaskAssignements());
             existingTaskStatus.setStatus(editedTaskStatus.getStatus());
 
             taskStatusRepository.save(existingTaskStatus);

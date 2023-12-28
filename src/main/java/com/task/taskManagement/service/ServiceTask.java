@@ -29,13 +29,8 @@ public class ServiceTask implements IServiceTask{
     }
 
     @Override
-    public Page<Task> getTaskByMc(String mc, Pageable t) {
-        return taskRepository.findByTitleContains(mc, t);
-    }
-
-    @Override
-    public List<Task> getTasksByIds(Set<Long> taskIds) {
-        return taskRepository.findByIdIn(taskIds);
+    public Page<Task> getTaskByMc(String mc, Pageable p) {
+        return taskRepository.findByTitleContains(mc, p);
     }
 
     @Override
@@ -55,12 +50,9 @@ public class ServiceTask implements IServiceTask{
         if (existingTaskOptional.isPresent()) {
             Task existingTask = existingTaskOptional.get();
 
+            existingTask.setRef(editedTask.getRef());
             existingTask.setTitle(editedTask.getTitle());
             existingTask.setDescription(editedTask.getDescription());
-            existingTask.setDueDate(editedTask.getDueDate());
-            existingTask.setUser(editedTask.getUser());
-            existingTask.setTeam(editedTask.getTeam());
-            existingTask.setTaskStatus(editedTask.getTaskStatus());
 
 
             taskRepository.save(existingTask);

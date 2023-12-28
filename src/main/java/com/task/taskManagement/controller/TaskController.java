@@ -1,12 +1,9 @@
 package com.task.taskManagement.controller;
 
 import com.task.taskManagement.entities.Task;
-import com.task.taskManagement.entities.Team;
-import com.task.taskManagement.entities.User;
 import com.task.taskManagement.service.ServiceTask;
 import com.task.taskManagement.service.ServiceTaskStatus;
-import com.task.taskManagement.service.ServiceTeam;
-import com.task.taskManagement.service.ServiceUser;
+import com.task.taskManagement.service.ServiceParticipant;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -31,10 +23,9 @@ public class TaskController {
 
     ServiceTask serviceTask;
     ServiceTaskStatus serviceTaskStatus;
-    ServiceTeam serviceTeam;
-    ServiceUser serviceUser;
+    ServiceParticipant serviceParticipant;
 
-    @GetMapping("/admin/tasks")
+    @GetMapping("/tasks")
     public String getAllTasks (Model m,
                                @RequestParam(name = "mc", defaultValue = "") String mc,
                                @RequestParam(name = "page", defaultValue = "0") int page,
@@ -47,29 +38,29 @@ public class TaskController {
         m.addAttribute("currentpage", tasks.getNumber());
 
 
-        return "tasks";
+        return "task/tasks";
     }
 
-    @GetMapping("/admin/addTask")
+    @GetMapping("/addTask")
     public String addTask(Model m)
     {
 
-        m.addAttribute("teams", serviceTeam.getAllTeams());
+        m.addAttribute("partipants", serviceParticipant.getAllParticipants());
         m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
         m.addAttribute("task", new Task());
 
-        return "addTask";
+        return "task/addTask";
     }
 
-    @PostMapping("/admin/addTask")
+    @PostMapping("/addTask")
     public String saveTask(@ModelAttribute Task t, Model m) throws IOException {
 
-        m.addAttribute("teams", serviceTeam.getAllTeams());
+        m.addAttribute("teams", serviceParticipant.getAllParticipants());
         m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
 
 
 
         serviceTask.saveTask(t);
-        return "redirect:/admin/tasks";
+        return "redirect:/tasks";
     }
 }

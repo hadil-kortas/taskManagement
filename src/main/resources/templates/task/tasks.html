@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 
     <meta charset="UTF-8">
-    <title>Admin View</title>
+    <title>Tasks View</title>
 </head>
 <body data-bs-theme="dark">
 
@@ -18,20 +18,19 @@
         <div class="container">
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active " href="" style="color: white; opacity: 0.5;">List of Tasks</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/admin/teams}" style="color: white">List of Teams</a></li>
+                    <li class="nav-item"><a class="nav-link active " th:href="@{/participants}" style="color: white;">Participants</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/tasks}" style="color: white; opacity: 0.5;">Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/taskAssignment}" style="color: white">Task Assignment</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
-
 <div class="card-body text-center px-4 py-5 px-md-5">
 
-    <a th:href="@{/admin/addTask}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Task</a>
+    <a th:href="@{/addTask}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Task</a>
 
-    <form style=" display: flex; margin-top: 20px;flex-direction: row; margin-right: 50px " class="form-inline" th:action="@{/admin/tasks}" method="get">
+    <form style=" display: flex; margin-top: 20px;flex-direction: row; margin-right: 50px " class="form-inline" th:action="@{/tasks}" method="get">
 
         <div class="form-group mx-sm-3 mb-2 ">
             <label for="inputSearch" class="sr-only">Key Word</label>
@@ -45,57 +44,35 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">
-                #
+               Ref
             </th>
 
             <th scope="col">
                 Title
             </th>
             <th scope="col">
-                Description
+                Short Description
             </th>
             <th scope="col">
-                Team
+                Details
             </th>
-            <th scope="col">
-                Deadline
-            </th>
-            <th scope="col">
-                Task Status
-            </th>
-            <th scope="col">
-                Progress
-            </th>
+
         </tr>
         </thead>
         <tbody>
         <tr th:each="t:${tasks}">
 
-            <td th:text="${t.id}" ></td>
+            <td th:text="${t.ref}" ></td>
             <td th:text="${t.title}" ></td>
             <td th:text="${t.description}"></td>
-
-            <td>
-                <div th:each="team : ${t.team}">
-                    <span th:text="${team.name}"></span>
-                </div>
+            <td th:if="${t.file=='' || t.file==null}">
+                <img src="/photos/inconnu2.jpg" width="60" height="60">
             </td>
-            <td th:text="${t.dueDate}"></td>
-            <td>
-                <span th:text="${t.taskStatus.statusName}"></span>
+            <td th:unless="${t.file=='' || t.file==null}">
+                <img th:src="${'/files/'+t.file}" width="60" height="60">
+
             </td>
 
-            <td>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-8 d-flex gap-2 justify-content-center">
-                            <div class="progress-container">
-                                    <div class="progress-bar" th:style="'--progress: ' + ${t.taskStatus.progressPercentage} + '%'">
-                                        <div class="progress-value" th:text="${t.taskStatus.progressPercentage + '%'}"></div>
-                                    </div>
-                            </div>
-                    </div>
-                </div>
-            </td>
 
         </tr>
         </tbody>
@@ -103,7 +80,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination ">
             <li class="page-item"  >
-                <a class="page-link" th:href="@{/admin/tasks(mc=${mc}, page=${currentpage - 1})}" aria-label="Previous" style="color: black">
+                <a class="page-link" th:href="@{/tasks(mc=${mc}, page=${currentpage - 1})}" aria-label="Previous" style="color: black">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -111,7 +88,7 @@
 
 
             <li class="page-item " style="position: absolute; right: 10px; margin-right: 36px">
-                <a class="page-link" th:href="@{/admin/tasks(mc=${mc}, page=${currentpage + 1})}" aria-label="Next" style="color: black">
+                <a class="page-link" th:href="@{/tasks(mc=${mc}, page=${currentpage + 1})}" aria-label="Next" style="color: black">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>

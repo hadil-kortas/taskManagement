@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Add Team</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-lg">Project Management System</span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu"
+               role="button"> <span class="sr-only">Toggle navigation</span>
+            </a><span id="cHead">Project</span>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu"><a href="#"
+                                                           class="dropdown-toggle" data-toggle="dropdown">
+                       <!-- <img
+                            src="../dist/img/user2-160x160.jpg" class="user-image"
+                            alt="User Image" />
+                        <span class="hidden-xs"
+                                                      sec:authentication="name">Mr./Mrs.</span>-->
+
+                    </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <!-- Menu Body -->
+                            <!-- Menu Footer-->
+                           <!-- <li class="user-footer">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="pull-left">
+                                            <a href="/user/changepassword"
+                                               class="btn btn-default btn-flat">Change Password</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="#" onclick="$('#logout-form').submit();"
+                                               class="btn btn-default btn-flat">Sign out</a>
+                                            <form th:action="@{/logout}" method="post" id="logout-form">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+                        </ul>
+
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <!-- search form -->
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+
+
+                <li><a href="/participants"> <i class="fa fa-user"
+                                        aria-hidden="true"></i> <span>Participant</span> <span
+                        class="pull-right-container"> </span>
+                </a></li>
+                <li><a href="/admin/tasks"> <i class="fa fa-tasks"
+                                           aria-hidden="true"></i> <span>Task</span> <span
+                        class="pull-right-container"> </span>
+                </a></li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<th:block layout:fragment="script"></th:block>
+</html>
