@@ -12,5 +12,5 @@ import java.util.Set;
 @Repository
 
 public interface TaskRepository extends JpaRepository<Task,Long> {
-    public Page<Task> findByTitleContains(String mc, Pageable t);
+    public Page<Task> findByRefContains(String mc, Pageable t);
 }

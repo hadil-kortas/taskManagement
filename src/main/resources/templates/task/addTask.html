@@ -12,46 +12,35 @@
 <body data-bs-theme="dark">
 
 <div class="container mt-5" style="padding: 20px">
-    <div class="card" style="padding-bottom: 40px">
-        <div class="card-header text-white" style="background-color: #212529"><h3>Add Task </h3></div>
+    <div class="card" style="max-width: 600px; margin: auto">
+        <div class="card-header text-white"><h3>Add Task </h3></div>
         <form method="post" th:action="@{/addTask}" enctype="multipart/form-data">
             <div class="form-group">
+                <label for="ref">Ref</label>
+                <input type="text" class="form-control" id="ref" name="ref" placeholder="Add task reference" th:value="${task.ref}" >
+                <span class="text-danger" th:errors="${task.ref}"></span>
+            </div>
+
+            <div class="form-group mt-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Add task title" th:value="${task.title}" >
+                <span class="text-danger" th:errors="${task.title}"></span>
             </div>
 
-            <div class="form-group">
-                <label for="title">Description</label>
+            <div class="form-group mt-3">
+                <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" placeholder="Add task description" th:text="${task.description}" rows="5"></textarea>
+                <span class="text-danger" th:errors="${task.description}"></span>
             </div>
 
             <div class="form-group mt-3">
-                <label for="participant">Participant:</label>
-                <select class="form-control" id="participant" name="participant">
-                    <option value="" selected="selected" disabled hidden>Select Participant</option>
-                    <option th:each="t:${partipants}"  th:value="${t.id}" th:text="${t.username}"
-                            th:selected="${task.id!=null && task.participant.id==t.id}"></option>
-                </select>
-                <span class="text-danger" th:errors="${task.participant}"></span>
+                Add file:
+                <input type="file" accept="pdfFile/*"  name="pdfFile">
             </div>
 
-            <div class="form-group">
-                <label for="deadline">Deadline</label>
-                <input type="datetime-local" class="form-control" id="deadline" name="deadline" th:value="${task.dueDate != null ? task.dueDate.format('yyyy-MM-ddTHH:mm') : ''}" />
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="taskstatus">Task Status:</label>
-                <select class="form-control" id="taskstatus" name="taskstatus">
-                    <option value="" selected="selected" disabled hidden>Select Task Status</option>
-                    <option th:each="t:${taskstatus}"  th:value="${t.id}" th:text="${t.status}"
-                            th:selected="${task.id!=null && task.taskStatus.id==t.id}"></option>
-                </select>
-                <span class="text-danger" th:errors="${task.team}"></span>
-            </div>
 
             <div class="text-center mt-5" >
-                <a th:href="@{/admin/tasks}" class="btn btn-outline-light">Cancel</a>
+                <a th:href="@{/tasks}" class="btn btn-outline-light">Cancel</a>
                 <button  type="submit" class="btn btn-outline-light">Save Task</button>
             </div>
         </form>

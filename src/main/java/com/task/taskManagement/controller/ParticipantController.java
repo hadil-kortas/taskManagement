@@ -29,10 +29,10 @@ public class ParticipantController {
 
     @GetMapping("/participants")
     public String getAllParticipants (Model m,
-                               @RequestParam(name = "mc", defaultValue = "") String mc,
+                                      @RequestParam(name = "mc", defaultValue = "") String mc,
                                       @RequestParam(name = "mc", defaultValue = "") String mc1,
-                               @RequestParam(name = "page", defaultValue = "0") int page,
-                               @RequestParam(name = "size", defaultValue = "5") int size)
+                                      @RequestParam(name = "page", defaultValue = "0") int page,
+                                      @RequestParam(name = "size", defaultValue = "6") int size)
     {
         page = Math.max(page, 0);
         Page<Participant> participants=serviceParticipant.getParticipantByMc(mc, mc1,PageRequest.of(page, size));

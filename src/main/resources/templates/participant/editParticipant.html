@@ -15,69 +15,65 @@
     <div class="card" style="max-width: 600px; margin: auto;">
         <div class="card-header text-white"><h3>Edit Participant </h3></div>
         <div class="card-body">
-                <form th:action="@{'/edit/' + ${participant.id}}"  method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Participant ID:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.id}"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Firstname:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.firstname}"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Lastname:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.lastname}"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-5" style="position: absolute;  right: 25px; margin-bottom: 50px; top: 70px">
-                            <div class="mb-4">
-                                <img th:if="${participant.photo != null}" th:src="${'/photos/' + participant.photo}" width="100" height="100" style="border-radius: 50px;" alt="Participant Photo">
-                                <img th:unless="${participant.photo != null}" src="/photos/inconnu1.jpg" width="100" height="100" style="border-radius: 50px;" alt="Default Photo">
-                            </div>
-                            <div class="mb-4" style="position: absolute; right: 18px; margin-bottom: 50px; top: 90px">
-                                <label for="image-upload" class="btn btn-outline-light">
-                                    <i class="fas fa-upload"></i>
-                                </label>
-                                <input id="image-upload" type="file" name="image" class="form-control" style="display: none;" />
-                            </div>
-                        </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Username:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.username}"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Job:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.job}"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Contact:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.phone}"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Email:</strong></label>
-                                <span class="form-control-plaintext" th:text="${participant.email}"></span>
-                            </div>
-
-
-
-
-
-                    <div class="text-center mt-5" >
-                        <a th:href="@{/participants}" class="btn btn-outline-light">Cancel</a>
-                        <button  type="submit" class="btn btn-outline-light">Save Participant</button>
+            <form method="post" th:action="@{'/edit/' + ${participant.id}}" enctype="multipart/form-data">
+                <div class=" text-center">
+                    <div class="mb-3">
+                        <img th:if="${participant.photo != null}" th:src="${'/photos/' + participant.photo}" width="100" height="100" style="border-radius: 50px;" alt="Participant Photo">
+                        <img th:unless="${participant.photo != null}" src="/photos/inconnu1.jpg" width="100" height="100" style="border-radius: 50px;" alt="Default Photo">
                     </div>
+                    <div class="mb-3">
+                        <input type="file" name="image" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Edit Firstname" th:value="${participant.firstname}">
+                    <span class="text-danger" th:errors="${participant.firstname}"></span>
+                </div>
 
-                </form>
+                <div class="form-group mt-3">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Edit Lastname" th:value="${participant.lastname}">
+                    <span class="text-danger" th:errors="${participant.lastname}"></span>
+                </div>
 
+
+
+                <div class="form-group mt-3">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Edit Username" th:value="${participant.username}">
+                    <span class="text-danger" th:errors="${participant.username}"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="job">Job</label>
+                    <input type="text" class="form-control" id="job" name="job" placeholder="Edit Job" th:value="${participant.job}">
+                    <span class="text-danger" th:errors="${participant.job}"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="contact">Contact</label>
+                    <input type="text" class="form-control" id="contact" name="contact" placeholder="Edit Contact" th:value="${participant.phone}">
+                    <span class="text-danger" th:errors="${participant.phone}"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Edit Email" th:value="${participant.email}">
+                    <span class="text-danger" th:errors="${participant.email}"></span>
+                </div>
+
+
+
+
+
+                <div class="text-center mt-5" >
+                    <a th:href="@{/participants}" class="btn btn-outline-light">Cancel</a>
+                    <button type="submit" class="btn btn-outline-light">Save Participant</button>
+                </div>
+            </form>
         </div>
-
     </div>
-
 </div>
-
-
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

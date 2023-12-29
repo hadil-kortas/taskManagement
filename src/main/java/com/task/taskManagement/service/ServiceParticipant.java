@@ -23,9 +23,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ServiceParticipant implements IServiceParticipant {
     private ParticipantRepository participantRepository;
-    ServiceTask serviceTask;
-
-
 
 
     @Override
