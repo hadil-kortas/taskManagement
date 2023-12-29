@@ -28,18 +28,6 @@ public class TaskManagementApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Participant participant = participantRepository.save(new Participant(null,"ons","belhaj","ons_belhaj","54039680","Machine learning developer","onsbelhaj@gmail.com","1234","1234",null,null))	;
-		Task task = taskRepository.save(new Task(null,"ML01","Develop chatbot","create a chatbot.......",null,null));
-		TaskStatus taskStatus = taskStatusRepository.save(new TaskStatus(null,"TO DO",null, Statusenum.TODO, 0));
-		TaskAssignment taskAssignment = TaskAssignment.builder()
-				.participant(participant)
-				.task(task)
-				.taskStatus(taskStatus)
-				.startDate(LocalDateTime.now())
-				.endDate(LocalDateTime.now().plusDays(7))
-				.build();
-
-		taskAssignementRepository.save(taskAssignment);
 
 
 	}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+    <meta charset="UTF-8">
+    <title>Participant Details</title>
+</head>
+<body data-bs-theme="dark">
+
+<div class="container mt-5" style="padding: 20px">
+    <div class="card" style="max-width: 600px; margin: auto;">
+        <div class="card-header text-white"><h3>Participant Details </h3></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Participant ID:</strong></label>
+                        <span class="form-control-plaintext" th:text="${participant.id}"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Firstname:</strong></label>
+                        <span class="form-control-plaintext" th:text="${participant.firstname}"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Lastname:</strong></label>
+                        <span class="form-control-plaintext" th:text="${participant.lastname}"></span>
+                    </div>
+                    <!-- Add more fields as needed -->
+                </div>
+                <div class="col-md-2 mb-5" style="position: absolute;  right: 25px; margin-bottom: 50px; top: 70px">
+                    <div class="mb-4">
+                        <img th:if="${participant.photo != null}" th:src="${'/photos/' + participant.photo}" width="100" height="100" style="border-radius: 50px;" alt="Participant Photo">
+                        <img th:unless="${participant.photo != null}" src="/photos/inconnu1.jpg" width="100" height="100" style="border-radius: 50px;" alt="Default Photo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>Username:</strong></label>
+                <span class="form-control-plaintext" th:text="${participant.username}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Job:</strong></label>
+                <span class="form-control-plaintext" th:text="${participant.job}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Contact:</strong></label>
+                <span class="form-control-plaintext" th:text="${participant.phone}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Email:</strong></label>
+                <span class="form-control-plaintext" th:text="${participant.email}"></span>
+            </div>
+
+            <div class="text-center mt-5">
+                <a th:href="@{/participants}" class="btn btn-outline-light">Back to Participants</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import com.task.taskManagement.entities.Participant;
 import com.task.taskManagement.service.ServiceTask;
 import com.task.taskManagement.service.ServiceTaskStatus;
 import com.task.taskManagement.service.ServiceParticipant;
+import jakarta.servlet.http.Part;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,8 @@ public class ParticipantController {
     ServiceParticipant serviceParticipant;
     ServiceTask serviceTask;
     ServiceTaskStatus serviceTaskStatus;
+
+
 
     @GetMapping("/participants")
     public String getAllParticipants (Model m,
@@ -57,11 +60,39 @@ public class ParticipantController {
         serviceParticipant.saveParticipant(t,mf);
         return "redirect:/participants";
     }
+    @GetMapping("/participant/{id}")
+    public String getParticipant(@PathVariable("id") Long id, Model m) {
+        Participant participant = serviceParticipant.getParticipant(id);
+        m.addAttribute("participant", participant);
+        return "participant/viewParticipant";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editParticipant(@PathVariable("id") Long id, Model model ) {
+        Participant participant = serviceParticipant.getParticipant(id);
+        model.addAttribute("participant", participant);
+        return "participant/editParticipant";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editParticipant(@PathVariable("id") Long id, @ModelAttribute Participant editedParticipant, @RequestParam("image") MultipartFile mf) throws IOException {
+        serviceParticipant.editParticipant(id, editedParticipant, mf);
+        return "redirect:/participants";
+    }
+
+
 
     @GetMapping("/delete/{id}")
     public String deleteParticipant(@PathVariable("id") Long idParticipant)
     {
         serviceParticipant.deleteParticipant(idParticipant);
+        return "redirect:/participants";
+    }
+
+
+    @GetMapping("/")
+    public String home()
+    {
         return "redirect:/participants";
     }
 }

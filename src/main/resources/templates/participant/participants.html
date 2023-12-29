@@ -84,9 +84,9 @@
             <td th:text="${p.phone}" ></td>
             <td th:text="${p.email}"></td>
             <td>
-                <a th:href="@{'/delete/'+${p.id}}" class="btn btn-danger fa fa-trash"></a>
-                <a th:href="@{'/edit/'+${p.id}}" class="btn btn-warning fa fa-edit"></a>
-                <a th:href="@{'/participants/'+${p.id}}" class="btn btn-success fa fa-eye"></a>
+                <a th:href="@{'/delete/'+${p.id}}" class="btn btn-light fa fa-trash" style="color: deeppink"></a>
+                <a th:href="@{'/edit/'+${p.id}}" class="btn btn-light fa fa-edit" style="color: deeppink"></a>
+                <a th:href="@{'/participant/'+${p.id}}" class="btn btn-light fa fa-eye" style="color: deeppink"></a>
             </td>
         </tr>
         </tbody>
