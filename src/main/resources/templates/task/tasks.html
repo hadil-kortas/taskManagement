@@ -56,6 +56,9 @@
             <th scope="col">
                 Details
             </th>
+            <th>
+                Actions
+            </th>
 
         </tr>
         </thead>
@@ -65,13 +68,22 @@
             <td th:text="${t.ref}" ></td>
             <td th:text="${t.title}" ></td>
             <td th:text="${t.description}"></td>
+
+            <td>
             <td th:if="${t.file=='' || t.file==null}">
                 <img src="/photos/inconnu2.jpg" width="60" height="60">
             </td>
             <td th:unless="${t.file=='' || t.file==null}">
-                <img th:src="${'/files/'+t.file}" width="60" height="60">
-
+                <img th:src="${'/photos/'+t.file}" width="60" height="60">
             </td>
+            </td>
+            <td>
+               <!-- <a th:href="${'/download/' + t.file}" class="btn btn-light fa fa-download" style="color: deeppink"></a> -->
+                <a th:href="@{'/delete/task/'+${t.id}}" class="btn btn-light fa fa-trash" style="color: deeppink"></a>
+                <a th:href="@{'/edit/task/'+${t.id}}" class="btn btn-light fa fa-edit" style="color: deeppink"></a>
+                <a th:href="@{'/task/'+${t.id}}" class="btn btn-light fa fa-eye" style="color: deeppink"></a>
+            </td>
+
 
 
         </tr>
