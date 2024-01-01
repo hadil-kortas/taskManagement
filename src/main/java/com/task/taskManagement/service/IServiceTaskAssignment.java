@@ -9,8 +9,8 @@ import java.util.List;
 public interface IServiceTaskAssignment {
 
     public void saveTaskAssignment(TaskAssignment taskAssignement);
-    public List<TaskAssignment> getAllTaskAssignments();
-    public Page<TaskAssignment> getTaskAssignmentByMc(String mc, Pageable t);
+    public Page<TaskAssignment> getAllTaskAssignments(Pageable pageable);
+    List<TaskAssignment> findByTaskRef(String taskRef);
 
     public void deleteTaskAssignment(Long id);
     public TaskAssignment getTaskAssignment (Long id);

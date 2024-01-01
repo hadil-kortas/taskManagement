@@ -72,6 +72,8 @@ public class ServiceTask implements IServiceTask{
                 existingTask.setFile(newFile);
             }
 
+            taskRepository.save(existingTask);
+
         }
 
     }

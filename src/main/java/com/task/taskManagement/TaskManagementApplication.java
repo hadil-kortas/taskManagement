@@ -27,12 +27,11 @@ public class TaskManagementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Task task = taskRepository.save(new Task(null, "ML01","Develop chatbot", "create a chatbot .........",null,null));
+
+
+	}
 
 
 
 	}
 
-
-
-	}

@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 
+    <meta charset="UTF-8">
+    <title>Task Details</title>
+</head>
+<body data-bs-theme="dark">
+
+<div class="container mt-5" style="padding: 20px">
+    <div class="card" style="max-width: 600px; margin: auto">
+        <div class="card-header text-white"><h3>Participant Details </h3></div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Ref:</strong></label>
+                <span class="form-control-plaintext" th:text="${task.ref}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Title:</strong></label>
+                <span class="form-control-plaintext" th:text="${task.title}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Short Description:</strong></label>
+                <p class="card-text" th:text="${task.description}"></p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Details:</strong></label>
+                <div th:if="${task.file != null}">
+                    <p class="card-text">File: <strong th:text="${task.file}"></strong></p>
+                    <a th:href="@{/downloadFile(fileName=${task.file})}" class="btn btn-light fa fa-download" style="color: black"></a>
+                </div>
+                <div th:unless="${task.file != null}">
+                    <p class="card-text">No File</p>
+                </div>
+            </div>
+
+            <a th:href="@{/tasks}" class="btn btn-outline-light mt-3">Back to Tasks</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

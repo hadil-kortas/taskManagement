@@ -24,14 +24,17 @@ public class ServiceTaskAssignment implements IServiceTaskAssignment {
     }
 
     @Override
-    public List<TaskAssignment> getAllTaskAssignments() {
-        return taskAssignementRepository.findAll();
+    public Page<TaskAssignment> getAllTaskAssignments(Pageable pageable) {
+        return taskAssignementRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<TaskAssignment> getTaskAssignmentByMc(String mc, Pageable p) {
-        return taskAssignementRepository.findByTaskTitleContainingIgnoreCase(mc, p);
+
+    public List<TaskAssignment> findByTaskRef(String taskRef) {
+
+        return taskAssignementRepository.findTaskAssignmentByTaskRef(taskRef);
     }
+
+
 
     @Override
     public void deleteTaskAssignment(Long id) {

@@ -19,6 +19,7 @@ public class Task {
     private String title;
     private String description;
     private String file;
+   // private String fileName;
 
     @OneToOne(mappedBy = "task")
     private TaskAssignment taskAssignement;

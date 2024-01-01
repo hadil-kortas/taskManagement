@@ -5,8 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface TaskAssignementRepository extends JpaRepository <TaskAssignment, Long> {
 
-    public Page<TaskAssignment> findByTaskTitleContainingIgnoreCase(String taskTitle, Pageable pageable);
 
+    List<TaskAssignment> findTaskAssignmentByTaskRef(String taskRef);
 }
+

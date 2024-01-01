@@ -7,21 +7,22 @@ import com.task.taskManagement.service.ServiceParticipant;
 import com.task.taskManagement.service.ServiceTask;
 import com.task.taskManagement.service.ServiceTaskAssignment;
 import com.task.taskManagement.service.ServiceTaskStatus;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class TaskAssignmentController {
+
+
 
     ServiceTaskAssignment serviceTaskAssignment;
     ServiceTask serviceTask;
@@ -31,41 +32,89 @@ public class TaskAssignmentController {
 
     @GetMapping("/taskAssignment")
     public String getAllTaskAssignments (Model m,
-                                         @RequestParam(name = "mc", defaultValue = "") String mc,
+                                         @RequestParam(name = "mc", defaultValue = "") String taskRef,
                                          @RequestParam(name = "page", defaultValue = "0") int page,
                                          @RequestParam(name = "size", defaultValue = "6") int size)
     {
-        Page<TaskAssignment> taskAssignment= serviceTaskAssignment.getTaskAssignmentByMc(mc, PageRequest.of(page, size));
-        m.addAttribute("mc", mc);
-        m.addAttribute("taskassignment", taskAssignment.getContent());
-        m.addAttribute("pages", new int[taskAssignment.getTotalPages()]);
-        m.addAttribute("currentpage", taskAssignment.getContent());
+        page = Math.max(page, 0);
+
+        Page<TaskAssignment> taskAssignments = serviceTaskAssignment.getAllTaskAssignments( PageRequest.of(page, size));
+        m.addAttribute("mc", taskRef);
+        m.addAttribute("taskassignment", taskAssignments.getContent());
+        m.addAttribute("pages", new int[taskAssignments.getTotalPages()]);
+        m.addAttribute("currentpage", taskAssignments.getNumber());
+
 
         return "taskAssignment/taskAssignment";
     }
+
+    @GetMapping("/taskAssignment/findByTaskRef")
+    public String getTaskAssignmentsByTaskRef(Model m, @RequestParam("mc") String taskRef) {
+        List<TaskAssignment> taskAssignments = serviceTaskAssignment.findByTaskRef(taskRef);
+        m.addAttribute("mc", taskRef);
+        m.addAttribute("taskassignment", taskAssignments);
+        m.addAttribute("currentpage", 0);
+        return "taskAssignment/taskAssignment";
+    }
+
+
+
 
     @GetMapping("/addTaskAssignment")
     public String addTaskAssignment(Model m)
     {
 
-        m.addAttribute("partipants", serviceParticipant.getAllParticipants());
+        m.addAttribute("taskAssignment", new TaskAssignment());
+        m.addAttribute("participants", serviceParticipant.getAllParticipants());
         m.addAttribute("task", serviceTask.getAllTasks());
         m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
-        m.addAttribute("task", new Task());
+
 
         return "taskAssignment/addTaskAssignment";
     }
 
-    @PostMapping("/addTaskAsignment")
-    public String saveTaskAssignment(@ModelAttribute TaskAssignment taskAssignement, Model m) throws IOException {
+    @PostMapping("/addTaskAssignment")
+    public String saveTaskAssignment(@Valid @ModelAttribute TaskAssignment taskAssignment, Model m)  {
 
-        m.addAttribute("particiant", serviceParticipant.getAllParticipants());
+        m.addAttribute("participants", serviceParticipant.getAllParticipants());
         m.addAttribute("task", serviceTask.getAllTasks());
         m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
 
 
 
-        serviceTaskAssignment.saveTaskAssignment(taskAssignement);
+        serviceTaskAssignment.saveTaskAssignment(taskAssignment);
         return "redirect:/taskAssignment";
     }
+
+    @GetMapping("/taskAssignment/{id}")
+    public String getTaskAssignment(@PathVariable("id") Long id, Model m) {
+        TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
+        m.addAttribute("taskAssignment", taskAssignment);
+        return "taskAssignment/viewTaskAssignment";
+    }
+
+    @GetMapping("/edit/taskAssignment/{id}")
+    public String editTaskAssignment(@PathVariable("id") Long id, Model model ) {
+        TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
+        model.addAttribute("taskAssignment", taskAssignment);
+        model.addAttribute("particiant", serviceParticipant.getAllParticipants());
+        model.addAttribute("task", serviceTask.getAllTasks());
+        model.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
+        return "taskAssignment/editTaskAssignment";
+    }
+
+    @PostMapping("/edit/taskAssignment/{id}")
+    public String editTaskAssignment(@PathVariable("id") Long id, @ModelAttribute TaskAssignment editedTaskAssignment) throws IOException {
+        serviceTaskAssignment.editTaskAssignment(id, editedTaskAssignment);
+        return "redirect:/taskAssignment";
+    }
+
+    @GetMapping("/delete/taskAssignment/{id}")
+    public String deleteTaskAssignment(@PathVariable("id") Long idTaskAssignment)
+    {
+        serviceTaskAssignment.deleteTaskAssignment(idTaskAssignment);
+        return "redirect:/taskAssignment";
+    }
+
+
 }

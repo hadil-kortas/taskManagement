@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,13 +25,20 @@ public class TaskAssignment {
     @OneToOne
     private Task task;
 
+
+
     @ManyToOne
     private Participant participant;
 
     @ManyToOne
     private TaskStatus taskStatus;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
+
+
 }
 
