@@ -1,10 +1,15 @@
 package com.task.taskManagement.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,14 +20,22 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String ref;
-    private String title;
-    private String description;
-    private String file;
-   // private String fileName;
 
-    @OneToOne(mappedBy = "task")
-    private TaskAssignment taskAssignement;
+    @NotEmpty(message = "Reference is required")
+    private String ref;
+
+    @NotEmpty(message = "Title is required")
+    private String title;
+
+    @NotEmpty
+    @Size(max = 255, message = "Description must be less than 255 characters")
+    private String description;
+
+    private String file;
+
+
+    @OneToMany
+    private List<TaskAssignment> taskAssignement;
 
 
 }

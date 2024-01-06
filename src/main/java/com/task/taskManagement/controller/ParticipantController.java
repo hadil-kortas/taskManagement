@@ -6,11 +6,13 @@ import com.task.taskManagement.service.ServiceTask;
 import com.task.taskManagement.service.ServiceTaskStatus;
 import com.task.taskManagement.service.ServiceParticipant;
 import jakarta.servlet.http.Part;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +56,12 @@ public class ParticipantController {
     }
 
     @PostMapping("/addParticipant")
-    public String saveParticipant(@ModelAttribute Participant t, Model m, @RequestParam("image") MultipartFile mf) throws IOException {
+    public String saveParticipant(@Valid Participant t, BindingResult bindingResult, Model m,
+                                  @RequestParam("image") MultipartFile mf) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            return "participant/addParticipant";
+        }
 
 
         serviceParticipant.saveParticipant(t,mf);

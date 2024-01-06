@@ -1,6 +1,7 @@
 package com.task.taskManagement.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,21 +23,24 @@ public class TaskAssignment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+//    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    @NotNull(message = "Task is required")
     private Task task;
 
-
-
     @ManyToOne
+    @NotNull(message = "Participant is required")
     private Participant participant;
 
     @ManyToOne
     private TaskStatus taskStatus;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Start Date is required")
     private LocalDate startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "End Date is required")
     private LocalDate endDate;
 
 

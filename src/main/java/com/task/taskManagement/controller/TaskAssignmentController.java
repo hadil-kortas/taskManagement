@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class TaskAssignmentController {
 
         m.addAttribute("taskAssignment", new TaskAssignment());
         m.addAttribute("participants", serviceParticipant.getAllParticipants());
-        m.addAttribute("task", serviceTask.getAllTasks());
+        m.addAttribute("tasks", serviceTask.getAllTasks());
         m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
 
 
@@ -74,14 +75,16 @@ public class TaskAssignmentController {
     }
 
     @PostMapping("/addTaskAssignment")
-    public String saveTaskAssignment(@Valid @ModelAttribute TaskAssignment taskAssignment, Model m)  {
+    public String saveTaskAssignment(@Valid TaskAssignment taskAssignment, BindingResult bindingResult, Model m)  {
 
-        m.addAttribute("participants", serviceParticipant.getAllParticipants());
-        m.addAttribute("task", serviceTask.getAllTasks());
-        m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
+        if (bindingResult.hasErrors()) {
 
+            m.addAttribute("participants", serviceParticipant.getAllParticipants());
+            m.addAttribute("tasks", serviceTask.getAllTasks());
+            m.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
+            return "addTaskAssignment";
 
-
+        }
         serviceTaskAssignment.saveTaskAssignment(taskAssignment);
         return "redirect:/taskAssignment";
     }

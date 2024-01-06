@@ -1,6 +1,7 @@
 package com.task.taskManagement.service;
 
 import com.task.taskManagement.dao.TaskAssignementRepository;
+import com.task.taskManagement.entities.Task;
 import com.task.taskManagement.entities.TaskAssignment;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,8 +19,10 @@ public class ServiceTaskAssignment implements IServiceTaskAssignment {
     private TaskAssignementRepository taskAssignementRepository;
 
     @Override
-    public void saveTaskAssignment(TaskAssignment taskAssignement) {
-        taskAssignementRepository.save(taskAssignement);
+    public void saveTaskAssignment(TaskAssignment taskAssignment) {
+
+
+        taskAssignementRepository.save(taskAssignment);
 
     }
 

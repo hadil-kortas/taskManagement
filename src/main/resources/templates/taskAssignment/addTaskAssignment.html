@@ -37,9 +37,9 @@
         <form method="post" th:action="@{/addTaskAssignment}" enctype="multipart/form-data">
             <div class="form-group mt-3">
                 <label for="ref">Task Reference</label>
-                <select class="form-control" id="ref" name="ref">
-                    <option th:each="task : ${task}" th:value="${task.id}" th:text="${task.ref}"
-                    th:selected="${taskAssignment.id!=null && taskAssignment.task.id}"></option>
+                <select class="form-control" id="ref" name="Task">
+                    <option th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.ref}"
+                            th:selected="${taskAssignment.id!=null && taskAssignment.task.id==task.id}"></option>
                 </select>
                 <span class="text-danger" th:errors="${taskAssignment.task}"></span>
             </div>
@@ -47,7 +47,7 @@
                 <label for="participant">Task Participant</label>
                 <select class="form-control" id="participant" name="participant">
                     <option th:each="participant : ${participants}" th:value="${participant.id}" th:text="${participant.username}"
-                            th:selected="${taskAssignment.id!=null && taskAssignment.participant.id}"></option>
+                            th:selected="${taskAssignment.id!=null && taskAssignment.participant.id==participant.id}"></option>
                 </select>
                 <span class="text-danger" th:errors="${taskAssignment.participant}"></span>
             </div>
@@ -107,14 +107,44 @@
 
 </div>
 
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $('.datepicker').datepicker({-->
+<!--            format: 'yyyy-mm-dd',-->
+<!--            autoclose: true-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 <script>
     $(document).ready(function () {
-        $('.datepicker').datepicker({
+        // Initialize the datepicker for start date
+        $('#startDate').datepicker({
             format: 'yyyy-mm-dd',
-            autoclose: true
+            autoclose: true,
+            startDate: new Date() // Disable dates prior to the current date
+        });
+
+        // Initialize the datepicker for end date
+        $('#endDate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            startDate: new Date(), // Disable dates prior to the current date
+            // Set the start date as the minimum date for the end date
+            startDate: $('#startDate').val(),
+            // Disable dates prior to the selected start date
+            endDate: new Date($('#startDate').val())
+        });
+
+        // Update the end date options when the start date changes
+        $('#startDate').on('changeDate', function () {
+            // Update the minimum date for the end date
+            $('#endDate').datepicker('setStartDate', new Date($(this).val()));
+            // Disable dates prior to the selected start date
+            $('#endDate').datepicker('setEndDate', new Date($(this).val()));
         });
     });
 </script>
+
 
 
 <!-- Bootstrap JS -->
