@@ -107,43 +107,43 @@
 
 </div>
 
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $('.datepicker').datepicker({-->
-<!--            format: 'yyyy-mm-dd',-->
-<!--            autoclose: true-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 <script>
     $(document).ready(function () {
-        // Initialize the datepicker for start date
-        $('#startDate').datepicker({
+        $('.datepicker').datepicker({
             format: 'yyyy-mm-dd',
-            autoclose: true,
-            startDate: new Date() // Disable dates prior to the current date
-        });
-
-        // Initialize the datepicker for end date
-        $('#endDate').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            startDate: new Date(), // Disable dates prior to the current date
-            // Set the start date as the minimum date for the end date
-            startDate: $('#startDate').val(),
-            // Disable dates prior to the selected start date
-            endDate: new Date($('#startDate').val())
-        });
-
-        // Update the end date options when the start date changes
-        $('#startDate').on('changeDate', function () {
-            // Update the minimum date for the end date
-            $('#endDate').datepicker('setStartDate', new Date($(this).val()));
-            // Disable dates prior to the selected start date
-            $('#endDate').datepicker('setEndDate', new Date($(this).val()));
+            autoclose: true
         });
     });
 </script>
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // Initialize the datepicker for start date-->
+<!--        // $('#startDate').datepicker({-->
+<!--        //     format: 'yyyy-mm-dd',-->
+<!--        //     autoclose: true,-->
+<!--        //     startDate: new Date() // Disable dates prior to the current date-->
+<!--        // });-->
+
+<!--        // Initialize the datepicker for end date-->
+<!--        // $('#endDate').datepicker({-->
+<!--        //     format: 'yyyy-mm-dd',-->
+<!--        //     autoclose: true,-->
+<!--        //     startDate: new Date(), // Disable dates prior to the current date-->
+<!--        //     // Set the start date as the minimum date for the end date-->
+<!--        //     startDate: $('#startDate').val(),-->
+<!--        //     // Disable dates prior to the selected start date-->
+<!--        //     endDate: new Date($('#startDate').val())-->
+<!--        // });-->
+
+<!--        // Update the end date options when the start date changes-->
+<!--       /* $('#startDate').on('changeDate', function () {-->
+<!--            // Update the minimum date for the end date-->
+<!--            $('#endDate').datepicker('setStartDate', new Date($(this).val()));-->
+<!--            // Disable dates prior to the selected start date-->
+<!--            $('#endDate').datepicker('setEndDate', new Date($(this).val()));-->
+<!--        });*/-->
+<!--    });-->
+<!--</script>-->
 
 
 

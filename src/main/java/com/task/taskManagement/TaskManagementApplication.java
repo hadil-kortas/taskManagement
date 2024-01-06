@@ -25,8 +25,13 @@ public class TaskManagementApplication implements CommandLineRunner {
 		SpringApplication.run(TaskManagementApplication.class, args);
 	}
 
+
 	@Override
 	public void run(String... args) throws Exception {
+//		TaskStatus taskStatus = taskStatusRepository.save(new TaskStatus(null,null,null, Statusenum.TODO, 0));
+//		TaskStatus taskStatus1 = taskStatusRepository.save(new TaskStatus(null,null,null, Statusenum.INPROGRESS, 50));
+//		TaskStatus taskStatus2 = taskStatusRepository.save(new TaskStatus(null,null,null, Statusenum.ALLMOSTDONE, 75));
+//		TaskStatus taskStatus3 = taskStatusRepository.save(new TaskStatus(null,null,null, Statusenum.DONE, 100));
 
 
 	}

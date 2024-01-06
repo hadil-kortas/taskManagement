@@ -44,12 +44,6 @@ public class Participant {
     @NotEmpty(message = "Confirm Password is required")
     private String confirmPassword;
 
-    @AssertTrue(message = "Password and Confirm Password must match")
-    private boolean isPasswordMatch() {
-        return password != null && password.equals(confirmPassword);
-    }
-
-
     @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL)
     List<TaskAssignment> taskAssignements ;
 

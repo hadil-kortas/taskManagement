@@ -87,7 +87,7 @@ public class TaskController {
     }
 
     @PostMapping("/edit/task/{id}")
-    public String editTask(@PathVariable("id") Long id, @Valid @ModelAttribute Task editedTask, BindingResult bindingResult,
+    public String editTask(@PathVariable("id") Long id, @Valid Task editedTask, BindingResult bindingResult,
                            @RequestParam("pdfFile") MultipartFile mf) throws IOException {
         if (bindingResult.hasErrors()) {
             return "task/editTask";

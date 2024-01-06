@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Task Details</title>
 </head>
-<body>
+<body data-bs-theme="dark">
+
+<div class="container mt-5" style="padding: 20px">
+    <div class="card" style="max-width: 600px; margin: auto">
+        <div class="card-header text-white"><h3>TaskAssignment Details </h3></div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Ref:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.task.ref}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Title:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.task.title}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Participant:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.participant.username}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Start Date:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.startDate}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>End Date:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.endDate}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Status:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.taskStatus.status}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Task Progress:</strong></label>
+                <span class="form-control-plaintext" th:text="${taskAssignment.taskStatus.progressPercentage}"></span>
+            </div>
+        </div>
+        <div style="display: flex;justify-content: center">
+            <a th:href="@{/taskAssignment}" class="btn btn-outline-light mt-3 mb-3" style="width: 300px">Back to TaskAssignments</a>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -58,9 +58,9 @@ public class ServiceTaskAssignment implements IServiceTaskAssignment {
 
             existingTaskAssignment.setTask(editedTaskAssignment.getTask());
             existingTaskAssignment.setParticipant(editedTaskAssignment.getParticipant());
-            existingTaskAssignment.setTaskStatus(editedTaskAssignment.getTaskStatus());
             existingTaskAssignment.setStartDate(editedTaskAssignment.getStartDate());
             existingTaskAssignment.setEndDate(editedTaskAssignment.getEndDate());
+            existingTaskAssignment.setTaskStatus(editedTaskAssignment.getTaskStatus());
 
 
             taskAssignementRepository.save(existingTaskAssignment);

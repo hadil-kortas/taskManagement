@@ -100,14 +100,14 @@ public class TaskAssignmentController {
     public String editTaskAssignment(@PathVariable("id") Long id, Model model ) {
         TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
         model.addAttribute("taskAssignment", taskAssignment);
-        model.addAttribute("particiant", serviceParticipant.getAllParticipants());
-        model.addAttribute("task", serviceTask.getAllTasks());
+        model.addAttribute("participant", serviceParticipant.getAllParticipants());
+        model.addAttribute("tasks", serviceTask.getAllTasks());
         model.addAttribute("taskstatus", serviceTaskStatus.getAllTaskStatus());
         return "taskAssignment/editTaskAssignment";
     }
 
     @PostMapping("/edit/taskAssignment/{id}")
-    public String editTaskAssignment(@PathVariable("id") Long id, @ModelAttribute TaskAssignment editedTaskAssignment) throws IOException {
+    public String editTaskAssignment(@PathVariable("id") Long id, TaskAssignment editedTaskAssignment) throws IOException {
         serviceTaskAssignment.editTaskAssignment(id, editedTaskAssignment);
         return "redirect:/taskAssignment";
     }
