@@ -1,5 +1,7 @@
 package com.task.taskManagement.security;
 
+import com.task.taskManagement.security.service.UserDetailsServiceImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,12 +17,21 @@ import org.springframework.security.web.SecurityFilterChain;
 
 public class SecurityConfig {
 
+
+    public PasswordEncoder passwordEncoder () {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public UserDetailsServiceImplementation userDetailsServiceImplementation;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.formLogin(formlogin->formlogin.permitAll());
-        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/user/**").hasRole("USER"));
-        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/admin/**").hasRole("ADMIN"));
+        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/admin/**").hasAuthority("ADMIN"));
+        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/user/**").hasAuthority("USER"));
         httpSecurity.authorizeHttpRequests(authorize->authorize.anyRequest().authenticated());
+        httpSecurity.userDetailsService(userDetailsServiceImplementation);
 
 
         return httpSecurity.build();
@@ -30,13 +41,10 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         return new InMemoryUserDetailsManager(
                 User.withUsername("user1").password(passwordEncoder().encode("1234")).roles("USER").build(),
-                User.withUsername("admin").password(passwordEncoder().encode("1234")).roles("USER","ADMIN").build()
+                User.withUsername("admin").password(passwordEncoder().encode("1234")).roles("ADMIN").build()
 
         );
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder () {
-        return new BCryptPasswordEncoder();
-    }
+
 }

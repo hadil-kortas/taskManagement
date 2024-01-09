@@ -30,7 +30,7 @@ public class ParticipantController {
 
 
 
-    @GetMapping("/user/participants")
+    @GetMapping("/admin/participants")
     public String getAllParticipants (Model m,
                                       @RequestParam(name = "mc", defaultValue = "") String mc,
                                       @RequestParam(name = "mc", defaultValue = "") String mc1,
@@ -65,7 +65,7 @@ public class ParticipantController {
         }
 
         serviceParticipant.saveParticipant(p,mf);
-        return "redirect:/user/participants";
+        return "redirect:/admin/participants";
     }
     @GetMapping("/admin/participant/{id}")
     public String getParticipant(@PathVariable("id") Long id, Model m) {
@@ -84,7 +84,7 @@ public class ParticipantController {
     @PostMapping("/admin/edit/{id}")
     public String editParticipant(@PathVariable("id") Long id, @ModelAttribute Participant editedParticipant, @RequestParam("image") MultipartFile mf) throws IOException {
         serviceParticipant.editParticipant(id, editedParticipant, mf);
-        return "redirect:/user/participants";
+        return "redirect:/admin/participants";
     }
 
 
@@ -93,14 +93,14 @@ public class ParticipantController {
     public String deleteParticipant(@PathVariable("id") Long idParticipant)
     {
         serviceParticipant.deleteParticipant(idParticipant);
-        return "redirect:/user/participants";
+        return "redirect:/admin/participants";
     }
 
 
     @GetMapping("/")
     public String home()
     {
-        return "redirect:/user/participants";
+        return "redirect:/admin/participants";
     }
 }
 

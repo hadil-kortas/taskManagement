@@ -36,7 +36,7 @@ public class TaskController {
     ServiceTaskStatus serviceTaskStatus;
     ServiceParticipant serviceParticipant;
 
-    @GetMapping("/user/tasks")
+    @GetMapping("/admin/tasks")
     public String getAllTasks (Model m,
                                @RequestParam(name = "mc", defaultValue = "") String mc,
                                @RequestParam(name = "page", defaultValue = "0") int page,
@@ -69,10 +69,10 @@ public class TaskController {
         }
 
         serviceTask.saveTask(t, mf);
-        return "redirect:/user/tasks";
+        return "redirect:/admin/tasks";
     }
 
-    @GetMapping("/user/task/{id}")
+    @GetMapping("/admin/task/{id}")
     public String getTask(@PathVariable("id") Long id, Model m) {
         Task task = serviceTask.getTask(id);
         m.addAttribute("task", task);
@@ -94,17 +94,17 @@ public class TaskController {
         }
 
         serviceTask.editTask(id, editedTask, mf);
-        return "redirect:/user/tasks";
+        return "redirect:/admin/tasks";
     }
 
     @GetMapping("/admin/delete/task/{id}")
     public String deleteTask(@PathVariable("id") Long idTask)
     {
         serviceTask.deleteTask(idTask);
-        return "redirect:/user/tasks";
+        return "redirect:/admin/tasks";
     }
 
-    @GetMapping("/user/downloadFile")
+    @GetMapping("/admin/downloadFile")
     public ResponseEntity<Resource> downloadFile(@RequestParam String fileName) throws IOException {
         Resource resource = new ClassPathResource("static/photos/" + fileName);
 

@@ -32,7 +32,7 @@ public class TaskAssignmentController {
     ServiceParticipant serviceParticipant;
 
 
-    @GetMapping("/user/taskAssignment")
+    @GetMapping("/admin/taskAssignment")
     public String getAllTaskAssignments (Model m,
                                          @RequestParam(name = "mc", defaultValue = "") String taskRef,
                                          @RequestParam(name = "page", defaultValue = "0") int page,
@@ -50,7 +50,7 @@ public class TaskAssignmentController {
         return "taskAssignment/taskAssignment";
     }
 
-    @GetMapping("/user/taskAssignment/findByTaskRef")
+    @GetMapping("/admin/taskAssignment/findByTaskRef")
     public String getTaskAssignmentsByTaskRef(Model m, @RequestParam("mc") String taskRef) {
         List<TaskAssignment> taskAssignments = serviceTaskAssignment.findByTaskRef(taskRef);
         m.addAttribute("mc", taskRef);
@@ -87,17 +87,17 @@ public class TaskAssignmentController {
 
         }
         serviceTaskAssignment.saveTaskAssignment(taskAssignment);
-        return "redirect:/user/taskAssignment";
+        return "redirect:/admin/taskAssignment";
     }
 
-    @GetMapping("/user/taskAssignment/{id}")
+    @GetMapping("/admin/taskAssignment/{id}")
     public String getTaskAssignment(@PathVariable("id") Long id, Model m) {
         TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
         m.addAttribute("taskAssignment", taskAssignment);
         return "taskAssignment/viewTaskAssignment";
     }
 
-    @GetMapping("/user/edit/taskAssignment/{id}")
+    @GetMapping("/admin/edit/taskAssignment/{id}")
     public String editTaskAssignment(@PathVariable("id") Long id, Model model ) {
         TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
         model.addAttribute("taskAssignment", taskAssignment);
@@ -107,17 +107,17 @@ public class TaskAssignmentController {
         return "taskAssignment/editTaskAssignment";
     }
 
-    @PostMapping("/user/edit/taskAssignment/{id}")
+    @PostMapping("/admin/edit/taskAssignment/{id}")
     public String editTaskAssignment(@PathVariable("id") Long id, TaskAssignment editedTaskAssignment) {
         serviceTaskAssignment.editTaskAssignment(id, editedTaskAssignment);
-        return "redirect:/user/taskAssignment";
+        return "redirect:/admin/taskAssignment";
     }
 
     @GetMapping("/admin/delete/taskAssignment/{id}")
     public String deleteTaskAssignment(@PathVariable("id") Long idTaskAssignment)
     {
         serviceTaskAssignment.deleteTaskAssignment(idTaskAssignment);
-        return "redirect:/user/taskAssignment";
+        return "redirect:/admin/taskAssignment";
     }
 
 
