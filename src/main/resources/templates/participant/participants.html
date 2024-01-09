@@ -13,14 +13,16 @@
 </head>
 <body data-bs-theme="dark">
 
+
+
 <header>
     <nav id="mainNav" class="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light">
         <div class="container">
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active " href="" style="color: white; opacity: 0.5;">Participants</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/tasks}" style="color: white">Tasks</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/taskAssignment}" style="color: white">Task Assignment</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/user/tasks}" style="color: white">Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/user/taskAssignment}" style="color: white">Task Assignment</a></li>
                 </ul>
             </div>
         </div>
@@ -29,9 +31,15 @@
 
 <div class="card-body text-center px-4 py-5 px-md-5">
 
-    <a th:href="@{/addParticipant}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Participant</a>
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/admin/addParticipant}" class="btn btn-outline-light" style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add Participant</a>
+    <div class="text-start" style="position: absolute; top: 10px; left: 10px; z-index: 9999;">
+        <span th:text="${#authentication.name}"></span>
+        <form method="post" th:action="@{/logout}" style="display: inline-block; margin-left: 10px;">
+            <button type="submit" class="btn btn-outline-light">Logout</button>
+        </form>
+    </div>
 
-    <form style=" display: flex; margin-top: 20px;flex-direction: row;  " class="form-inline" th:action="@{/participants}" method="get">
+    <form style=" display: flex; margin-top: 20px;flex-direction: row;  " class="form-inline" th:action="@{/user/participants}" method="get">
 
         <div class="form-group mx-sm-3 mb-2 ">
             <label for="inputSearch" class="sr-only">Key Word</label>
@@ -65,7 +73,7 @@
             <th>
                 Email
             </th>
-            <th>
+            <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                 Actions
             </th>
 
@@ -86,10 +94,12 @@
             <td th:text="${p.job}" ></td>
             <td th:text="${p.phone}" ></td>
             <td th:text="${p.email}"></td>
-            <td>
-                <a th:href="@{'/delete/'+${p.id}}" class="btn btn-light fa fa-trash" style="color: deeppink"></a>
-                <a th:href="@{'/edit/'+${p.id}}" class="btn btn-light fa fa-edit" style="color: deeppink"></a>
-                <a th:href="@{'/participant/'+${p.id}}" class="btn btn-light fa fa-eye" style="color: deeppink"></a>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+
+                    <a th:href="@{'/admin/delete/'+${p.id}}" class="btn btn-light fa fa-trash" style="color: deeppink"></a>
+                    <a th:href="@{'/admin/edit/'+${p.id}}" class="btn btn-light fa fa-edit" style="color: deeppink"></a>
+                    <a th:href="@{'/admin/participant/'+${p.id}}" class="btn btn-light fa fa-eye" style="color: deeppink"></a>
+
             </td>
         </tr>
         </tbody>
@@ -97,7 +107,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination ">
             <li class="page-item"  >
-                <a class="page-link" th:href="@{/participants(mc=${mc}, page=${currentpage - 1})}" aria-label="Previous" style="color: black">
+                <a class="page-link" th:href="@{/user/participants(mc=${mc}, page=${currentpage - 1})}" aria-label="Previous" style="color: black">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -105,7 +115,7 @@
 
 
             <li class="page-item " style="position: absolute; right: 10px; margin-right: 36px">
-                <a class="page-link" th:href="@{/participants(mc=${mc}, page=${currentpage + 1})}" aria-label="Next" style="color: black">
+                <a class="page-link" th:href="@{/user/participants(mc=${mc}, page=${currentpage + 1})}" aria-label="Next" style="color: black">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>

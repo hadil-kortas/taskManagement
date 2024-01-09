@@ -30,7 +30,7 @@ public class ParticipantController {
 
 
 
-    @GetMapping("/participants")
+    @GetMapping("/user/participants")
     public String getAllParticipants (Model m,
                                       @RequestParam(name = "mc", defaultValue = "") String mc,
                                       @RequestParam(name = "mc", defaultValue = "") String mc1,
@@ -49,14 +49,14 @@ public class ParticipantController {
         return "participant/participants";
     }
 
-    @GetMapping("/addParticipant")
+    @GetMapping("/admin/addParticipant")
     public String addParticipant( Model m)
     {
         m.addAttribute("participant", new Participant());
         return "participant/addParticipant";
     }
 
-    @PostMapping("/addParticipant")
+    @PostMapping("/admin/addParticipant")
     public String saveParticipant(@Valid Participant p, BindingResult bindingResult, Model m,
                                   @RequestParam("image") MultipartFile mf) throws IOException {
 
@@ -65,42 +65,42 @@ public class ParticipantController {
         }
 
         serviceParticipant.saveParticipant(p,mf);
-        return "redirect:/participants";
+        return "redirect:/user/participants";
     }
-    @GetMapping("/participant/{id}")
+    @GetMapping("/admin/participant/{id}")
     public String getParticipant(@PathVariable("id") Long id, Model m) {
         Participant participant = serviceParticipant.getParticipant(id);
         m.addAttribute("participant", participant);
         return "participant/viewParticipant";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String editParticipant(@PathVariable("id") Long id, Model model ) {
         Participant participant = serviceParticipant.getParticipant(id);
         model.addAttribute("participant", participant);
         return "participant/editParticipant";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/admin/edit/{id}")
     public String editParticipant(@PathVariable("id") Long id, @ModelAttribute Participant editedParticipant, @RequestParam("image") MultipartFile mf) throws IOException {
         serviceParticipant.editParticipant(id, editedParticipant, mf);
-        return "redirect:/participants";
+        return "redirect:/user/participants";
     }
 
 
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteParticipant(@PathVariable("id") Long idParticipant)
     {
         serviceParticipant.deleteParticipant(idParticipant);
-        return "redirect:/participants";
+        return "redirect:/user/participants";
     }
 
 
     @GetMapping("/")
     public String home()
     {
-        return "redirect:/participants";
+        return "redirect:/user/participants";
     }
 }
 

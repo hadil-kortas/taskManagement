@@ -32,14 +32,16 @@
 <div class="container mt-5" style="padding: 20px">
     <div class="card" style="max-width: 600px; margin: auto">
         <div class="card-header text-white"><h3>Edit Task Assignment</h3></div>
-        <form method="post" th:action="@{'/edit/taskAssignment/' + ${taskAssignment.id}}" enctype="multipart/form-data">
+        <form method="post" th:action="@{'/user/edit/taskAssignment/' + ${taskAssignment.id}}" enctype="multipart/form-data">
 
+            <!-- Task Reference (editable for ADMIN) -->
             <div class="form-group mt-3">
                 <label for="ref">Task Reference</label>
                 <select class="form-control" id="ref" name="Task">
                     <option th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.ref}" th:selected="${taskAssignment.id!=null && taskAssignment.task.id==task.id}"></option>
                 </select>
             </div>
+
 
             <div class="form-group mt-3">
                 <label for="participant">Task Participant</label>
@@ -54,12 +56,14 @@
                     <input type="text" class="form-control datepicker" id="startDate" name="startDate"
                            th:value="${taskAssignment.startDate}"
                            style="max-width: 300px; max-height: 300px"
+                           th:readonly="${not #authorization.expression('hasRole(''ADMIN'')')}"
                     />
                     <div class="input-group-append" style="margin: 5px">
                         <i class="far fa-calendar-alt"></i>
                     </div>
                 </div>
             </div>
+
 
             <div class="form-group mt-3">
                 <label for="endDate">End Date</label>
@@ -74,6 +78,8 @@
                 </div>
             </div>
 
+
+
             <div class="form-group mt-3">
                 <label for="taskStatus">Task Status:</label>
                 <select class="form-control" id="taskStatus" name="taskStatus">
@@ -83,7 +89,7 @@
 
 
             <div class="text-center mt-5">
-                <a th:href="@{/taskAssignment}" class="btn btn-outline-light" style="margin-bottom: 10px">Cancel</a>
+                <a th:href="@{/user/taskAssignment}" class="btn btn-outline-light" style="margin-bottom: 10px">Cancel</a>
                 <button type="submit" class="btn btn-outline-light" style="margin-bottom: 10px">Save Assignment</button>
             </div>
         </form>

@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class TaskAssignmentController {
     ServiceParticipant serviceParticipant;
 
 
-    @GetMapping("/taskAssignment")
+    @GetMapping("/user/taskAssignment")
     public String getAllTaskAssignments (Model m,
                                          @RequestParam(name = "mc", defaultValue = "") String taskRef,
                                          @RequestParam(name = "page", defaultValue = "0") int page,
@@ -49,7 +50,7 @@ public class TaskAssignmentController {
         return "taskAssignment/taskAssignment";
     }
 
-    @GetMapping("/taskAssignment/findByTaskRef")
+    @GetMapping("/user/taskAssignment/findByTaskRef")
     public String getTaskAssignmentsByTaskRef(Model m, @RequestParam("mc") String taskRef) {
         List<TaskAssignment> taskAssignments = serviceTaskAssignment.findByTaskRef(taskRef);
         m.addAttribute("mc", taskRef);
@@ -61,7 +62,7 @@ public class TaskAssignmentController {
 
 
 
-    @GetMapping("/addTaskAssignment")
+    @GetMapping("/admin/addTaskAssignment")
     public String addTaskAssignment(Model m)
     {
 
@@ -74,7 +75,7 @@ public class TaskAssignmentController {
         return "taskAssignment/addTaskAssignment";
     }
 
-    @PostMapping("/addTaskAssignment")
+    @PostMapping("/admin/addTaskAssignment")
     public String saveTaskAssignment(@Valid TaskAssignment taskAssignment, BindingResult bindingResult, Model m)  {
 
         if (bindingResult.hasErrors()) {
@@ -86,17 +87,17 @@ public class TaskAssignmentController {
 
         }
         serviceTaskAssignment.saveTaskAssignment(taskAssignment);
-        return "redirect:/taskAssignment";
+        return "redirect:/user/taskAssignment";
     }
 
-    @GetMapping("/taskAssignment/{id}")
+    @GetMapping("/user/taskAssignment/{id}")
     public String getTaskAssignment(@PathVariable("id") Long id, Model m) {
         TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
         m.addAttribute("taskAssignment", taskAssignment);
         return "taskAssignment/viewTaskAssignment";
     }
 
-    @GetMapping("/edit/taskAssignment/{id}")
+    @GetMapping("/user/edit/taskAssignment/{id}")
     public String editTaskAssignment(@PathVariable("id") Long id, Model model ) {
         TaskAssignment taskAssignment = serviceTaskAssignment.getTaskAssignment(id);
         model.addAttribute("taskAssignment", taskAssignment);
@@ -106,17 +107,17 @@ public class TaskAssignmentController {
         return "taskAssignment/editTaskAssignment";
     }
 
-    @PostMapping("/edit/taskAssignment/{id}")
-    public String editTaskAssignment(@PathVariable("id") Long id, TaskAssignment editedTaskAssignment) throws IOException {
+    @PostMapping("/user/edit/taskAssignment/{id}")
+    public String editTaskAssignment(@PathVariable("id") Long id, TaskAssignment editedTaskAssignment) {
         serviceTaskAssignment.editTaskAssignment(id, editedTaskAssignment);
-        return "redirect:/taskAssignment";
+        return "redirect:/user/taskAssignment";
     }
 
-    @GetMapping("/delete/taskAssignment/{id}")
+    @GetMapping("/admin/delete/taskAssignment/{id}")
     public String deleteTaskAssignment(@PathVariable("id") Long idTaskAssignment)
     {
         serviceTaskAssignment.deleteTaskAssignment(idTaskAssignment);
-        return "redirect:/taskAssignment";
+        return "redirect:/user/taskAssignment";
     }
 
 

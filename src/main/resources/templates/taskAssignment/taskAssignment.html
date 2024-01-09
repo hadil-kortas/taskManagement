@@ -19,11 +19,11 @@
         <div class="container">
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active " th:href="@{/participants}"
+                    <li class="nav-item"><a class="nav-link active " th:href="@{/user/participants}"
                                             style="color: white;">Participants</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/tasks}" style="color: white; ">Tasks</a>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/user/tasks}" style="color: white; ">Tasks</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/taskAssignment}" style="color: white; opacity: 0.5;">Task
+                    <li class="nav-item"><a class="nav-link active" href="" style="color: white; opacity: 0.5;">Task
                         Assignment</a></li>
                 </ul>
             </div>
@@ -33,10 +33,10 @@
 
 <div class="card-body text-center px-4 py-5 px-md-5">
 
-    <a th:href="@{addTaskAssignment}" class="btn btn-outline-light"
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/admin/addTaskAssignment}" class="btn btn-outline-light"
        style="position: absolute; top: 10px; right: 10px;z-index: 9999;">Add TaskAssignment</a>
     <form style=" display: flex; margin-top: 20px;flex-direction: row; margin-right: 50px "
-          class="form-inline" th:action="@{/taskAssignment/findByTaskRef}" method="get">
+          class="form-inline" th:action="@{/user/taskAssignment/findByTaskRef}" method="get">
 
         <div class="form-group mx-sm-3 mb-2 ">
             <label for="inputSearch" class="sr-only">Key Word</label>
@@ -81,10 +81,15 @@
             </td>
 
             <td>
-                <a th:href="@{'delete/taskAssignment/'+${task.id}}" class="btn btn-light fa fa-trash" style="color: deeppink"></a>
-                <a th:href="@{'/edit/taskAssignment/'+${task.id}}" class="btn btn-light fa fa-edit" style="color: deeppink"></a>
-                <a th:href="@{'/taskAssignment/'+${task.id}}" class="btn btn-light fa fa-eye" style="color: deeppink"></a>
+                <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                   th:href="@{'/admin/delete/taskAssignment/' + ${task.id}}"
+                   class="btn btn-light fa fa-trash" style="color: deeppink"></a>
+                <a th:href="@{'/user/edit/taskAssignment/' + ${task.id}}"
+                   class="btn btn-light fa fa-edit" style="color: deeppink"></a>
+                <a th:href="@{'/user/taskAssignment/' + ${task.id}}"
+                   class="btn btn-light fa fa-eye" style="color: deeppink"></a>
             </td>
+
         </tr>
 
         </tbody>
@@ -93,7 +98,7 @@
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link"
-                   th:href="@{/taskAssignment( page=${currentpage - 1})}"
+                   th:href="@{/user/taskAssignment( page=${currentpage - 1})}"
                    aria-label="Previous" style="color: black">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
@@ -102,7 +107,7 @@
             <li class="page-item"
                 style="position: absolute; right: 10px; margin-right: 36px">
                 <a class="page-link"
-                   th:href="@{/taskAssignment( page=${currentpage + 1})}"
+                   th:href="@{/user/taskAssignment( page=${currentpage + 1})}"
                    aria-label="Next" style="color: black">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>

@@ -15,7 +15,7 @@
 <div class="container mt-5" style="padding: 20px">
     <div class="card" style="max-width: 600px; margin: auto">
         <div class="card-header text-white"><h3>Edit Task</h3></div>
-        <form method="post" th:action="@{'/edit/task/' + ${task.id}}" enctype="multipart/form-data">
+        <form method="post" th:action="@{'/admin/edit/task/' + ${task.id}}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="ref">Ref</label>
                 <input type="text" class="form-control" id="ref" name="ref" placeholder="Edit task reference" th:value="${task.ref}" >
@@ -40,7 +40,7 @@
                 <input type="file" accept=".pdf" name="pdfFile">
             </div>
             <div class="text-center mt-5">
-                <a th:href="@{/tasks}" class="btn btn-outline-light">Cancel</a>
+                <a th:href="@{/user/tasks}" class="btn btn-outline-light">Cancel</a>
                 <button type="submit" class="btn btn-outline-light">Save Changes</button>
             </div>
         </form>

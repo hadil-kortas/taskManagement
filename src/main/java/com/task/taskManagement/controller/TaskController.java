@@ -36,7 +36,7 @@ public class TaskController {
     ServiceTaskStatus serviceTaskStatus;
     ServiceParticipant serviceParticipant;
 
-    @GetMapping("/tasks")
+    @GetMapping("/user/tasks")
     public String getAllTasks (Model m,
                                @RequestParam(name = "mc", defaultValue = "") String mc,
                                @RequestParam(name = "page", defaultValue = "0") int page,
@@ -53,7 +53,7 @@ public class TaskController {
         return "task/tasks";
     }
 
-    @GetMapping("/addTask")
+    @GetMapping("/admin/addTask")
     public String addTask(Model m)
     {
 
@@ -61,7 +61,7 @@ public class TaskController {
         return "task/addTask";
     }
 
-    @PostMapping("/addTask")
+    @PostMapping("/admin/addTask")
     public String saveTask(@Valid Task t, BindingResult bindingResult, Model m,
                            @RequestParam("pdfFile") MultipartFile mf) throws IOException {
         if (bindingResult.hasErrors()) {
@@ -69,24 +69,24 @@ public class TaskController {
         }
 
         serviceTask.saveTask(t, mf);
-        return "redirect:/tasks";
+        return "redirect:/user/tasks";
     }
 
-    @GetMapping("/task/{id}")
+    @GetMapping("/user/task/{id}")
     public String getTask(@PathVariable("id") Long id, Model m) {
         Task task = serviceTask.getTask(id);
         m.addAttribute("task", task);
         return "task/viewTask";
     }
 
-    @GetMapping("/edit/task/{id}")
+    @GetMapping("/admin/edit/task/{id}")
     public String editTask(@PathVariable("id") Long id, Model model ) {
         Task task = serviceTask.getTask(id);
         model.addAttribute("task", task);
         return "task/editTask";
     }
 
-    @PostMapping("/edit/task/{id}")
+    @PostMapping("/admin/edit/task/{id}")
     public String editTask(@PathVariable("id") Long id, @Valid Task editedTask, BindingResult bindingResult,
                            @RequestParam("pdfFile") MultipartFile mf) throws IOException {
         if (bindingResult.hasErrors()) {
@@ -94,17 +94,17 @@ public class TaskController {
         }
 
         serviceTask.editTask(id, editedTask, mf);
-        return "redirect:/tasks";
+        return "redirect:/user/tasks";
     }
 
-    @GetMapping("/delete/task/{id}")
+    @GetMapping("/admin/delete/task/{id}")
     public String deleteTask(@PathVariable("id") Long idTask)
     {
         serviceTask.deleteTask(idTask);
-        return "redirect:/tasks";
+        return "redirect:/user/tasks";
     }
 
-    @GetMapping("/downloadFile")
+    @GetMapping("/user/downloadFile")
     public ResponseEntity<Resource> downloadFile(@RequestParam String fileName) throws IOException {
         Resource resource = new ClassPathResource("static/photos/" + fileName);
 

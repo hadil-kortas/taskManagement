@@ -15,7 +15,7 @@
     <div class="card" style="max-width: 600px; margin: auto;">
         <div class="card-header text-white"><h3>Add Participant </h3></div>
         <div class="card-body">
-            <form method="post" th:action="@{/addParticipant}" enctype="multipart/form-data">
+            <form method="post" th:action="@{/admin/addParticipant}" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="firstname">Firstname</label>
                     <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Add Firstname" th:value="${participant.firstname}">
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="text-center mt-5" >
-                    <a th:href="@{/participants}" class="btn btn-outline-light">Cancel</a>
+                    <a th:href="@{/user/participants}" class="btn btn-outline-light">Cancel</a>
                     <button  type="submit" class="btn btn-outline-light">Save Participant</button>
                 </div>
 

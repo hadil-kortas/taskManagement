@@ -34,14 +34,14 @@
                 <label class="form-label"><strong>Task Details:</strong></label>
                 <div th:if="${task.file != null}">
                     <p class="card-text">File: <strong th:text="${task.file}"></strong></p>
-                    <a th:href="@{/downloadFile(fileName=${task.file})}" class="btn btn-light fa fa-download" style="color: black"></a>
+                    <a th:href="@{/user/downloadFile(fileName=${task.file})}" class="btn btn-light fa fa-download" style="color: black"></a>
                 </div>
                 <div th:unless="${task.file != null}">
                     <p class="card-text">No File</p>
                 </div>
             </div>
 
-            <a th:href="@{/tasks}" class="btn btn-outline-light mt-3">Back to Tasks</a>
+            <a th:href="@{/user/tasks}" class="btn btn-outline-light mt-3">Back to Tasks</a>
         </div>
     </div>
 </div>

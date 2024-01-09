@@ -34,7 +34,7 @@
 <div class="container mt-5" style="padding: 20px">
     <div class="card" style="max-width: 600px; margin: auto">
         <div class="card-header text-white"><h3>Add TaskAssignment </h3></div>
-        <form method="post" th:action="@{/addTaskAssignment}" enctype="multipart/form-data">
+        <form method="post" th:action="@{/admin/addTaskAssignment}" enctype="multipart/form-data">
             <div class="form-group mt-3">
                 <label for="ref">Task Reference</label>
                 <select class="form-control" id="ref" name="Task">
@@ -95,7 +95,7 @@
             </div>
 
             <div class="text-center mt-5" >
-                <a th:href="@{/taskAssignment}" class="btn btn-outline-light" style="margin-bottom: 10px">Cancel</a>
+                <a th:href="@{/user/taskAssignment}" class="btn btn-outline-light" style="margin-bottom: 10px">Cancel</a>
                 <button  type="submit" class="btn btn-outline-light" style="margin-bottom: 10px">Save Assignment</button>
             </div>
 
