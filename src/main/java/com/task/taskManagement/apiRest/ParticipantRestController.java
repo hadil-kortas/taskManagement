@@ -27,7 +27,7 @@ public class ParticipantRestController {
     @GetMapping("/user/participants")
     public ModelAndView getAllParticipants(
             @RequestParam(name = "mc", defaultValue = "") String mc,
-            @RequestParam(name = "mc", defaultValue = "") String mc1,
+            @RequestParam(name = "mc1", defaultValue = "") String mc1,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "6") int size,
             Model model) {
@@ -38,7 +38,7 @@ public class ParticipantRestController {
         model.addAttribute("pages", new int[p.getTotalPages()]);
         model.addAttribute("currentpage", page);
         model.addAttribute("mc", mc);
-        model.addAttribute("mc",mc1);
+        model.addAttribute("mc1",mc1);
 
         ModelAndView modelAndView = new ModelAndView("participantRest");
         modelAndView.addObject("participants", p);

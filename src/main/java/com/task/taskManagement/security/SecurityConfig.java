@@ -30,9 +30,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.formLogin(formlogin->formlogin.permitAll());
         httpSecurity.httpBasic(Customizer.withDefaults());
-        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/admin/**").hasAuthority("ADMIN"));
-        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/api/user/**").hasAuthority("USER"));
-        httpSecurity.authorizeHttpRequests(authorize->authorize.anyRequest().authenticated());
+        httpSecurity.authorizeHttpRequests(authorize -> {
+            authorize
+                    .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                    //.requestMatchers("/api/user/**").hasAuthority("USER")
+                    .anyRequest().authenticated();
+        });
+        httpSecurity.exceptionHandling(exception->exception.accessDeniedPage("/errorPage"));
         httpSecurity.userDetailsService(userDetailsServiceImplementation);
         httpSecurity.csrf(c->c.disable());
         return httpSecurity.build();

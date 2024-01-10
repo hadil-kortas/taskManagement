@@ -21,7 +21,7 @@ public class TaskRestController {
 
     ServiceTask serviceTask;
 
-    @GetMapping("/tasks")
+    @GetMapping("/user/tasks")
     public ModelAndView getAllTasks(
             @RequestParam(name = "mc", defaultValue = "") String mc,
             @RequestParam(name = "page", defaultValue = "0") int page,

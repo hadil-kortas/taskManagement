@@ -14,11 +14,18 @@
     <div class="container mx-auto">
         <ul class="flex">
             <li class="mr-6"><a href="#" class="hover:text-gray-300">Home</a></li>
-            <li class="mr-6"><a href="/api/tasks" class="hover:text-gray-300">Tasks</a></li>
-            <li class="mr-6"><a href="/api/taskAssignment" class="hover:text-gray-300">Task Assignment</a></li>
+            <li class="mr-6"><a href="/api/user/tasks" class="hover:text-gray-300">Tasks</a></li>
+            <li class="mr-6"><a href="/api/user/taskAssignment" class="hover:text-gray-300">Task Assignment</a></li>
         </ul>
     </div>
 </nav>
+
+<!--<div class="text-start" style="position: absolute; top: 10px; right: 10px; z-index: 9999; color: white">-->
+<!--    <span th:text="${#authentication.name}"></span>-->
+<!--    <form method="post" th:action="@{/logout}" style="display: inline-block; margin-left: 10px;">-->
+<!--        <button type="submit" class="btn btn-outline-light">Logout</button>-->
+<!--    </form>-->
+<!--</div>-->
 
 <form action="/api/user/participants" method="get" class="container mx-auto my-4">
 

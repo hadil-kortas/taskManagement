@@ -12,14 +12,14 @@
 <nav class="bg-blue-500 p-4 text-white">
     <div class="container mx-auto">
         <ul class="flex">
-            <li class="mr-6"><a href="/api/participants" class="hover:text-gray-300">Home</a></li>
-            <li class="mr-6"><a href="/api/tasks" class="hover:text-gray-300">Tasks</a></li>
+            <li class="mr-6"><a href="/api/user/participants" class="hover:text-gray-300">Home</a></li>
+            <li class="mr-6"><a href="/api/user/tasks" class="hover:text-gray-300">Tasks</a></li>
             <li class="mr-6"><a href="" class="hover:text-gray-300">Task Assignment</a></li>
         </ul>
     </div>
 </nav>
 
-<form action="/api/taskAssignment" method="get" class="container mx-auto my-4">
+<form action="/api/user/taskAssignment" method="get" class="container mx-auto my-4">
 
 
 </form>
@@ -52,10 +52,13 @@
             </div>
         </td>
 
-        <!--        <td class="py-2 px-4 border-b" >-->
-<!--            <a th:href="@{'/api/edit/taskAssignment/' + ${t.id}}"-->
-<!--               class="btn btn-light fa fa-edit" style="color: deeppink"></a>-->
-<!--        </td>-->
+        <td class="py-2 px-4 border-b">
+            <a th:href="@{'/api/user/update/taskAssignment/' + ${t.id}}"
+               class="inline-block px-2 py-1 text-white bg-pink-500 rounded hover:bg-pink-700">
+               Edit
+            </a>
+        </td>
+
 
 
     </tr>
