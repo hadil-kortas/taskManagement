@@ -31,7 +31,7 @@ public class SecurityConfig {
         httpSecurity.formLogin(formlogin->formlogin.permitAll());
         httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/admin/**").hasAuthority("ADMIN"));
-        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/user/**").hasAuthority("USER"));
+        httpSecurity.authorizeHttpRequests(authorize->authorize.requestMatchers("/api/user/**").hasAuthority("USER"));
         httpSecurity.authorizeHttpRequests(authorize->authorize.anyRequest().authenticated());
         httpSecurity.userDetailsService(userDetailsServiceImplementation);
         httpSecurity.csrf(c->c.disable());

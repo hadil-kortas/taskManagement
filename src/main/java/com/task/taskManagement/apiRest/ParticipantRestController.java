@@ -24,7 +24,7 @@ public class ParticipantRestController {
     ServiceParticipant serviceParticipant;
 
 
-    @GetMapping("/participants")
+    @GetMapping("/user/participants")
     public ModelAndView getAllParticipants(
             @RequestParam(name = "mc", defaultValue = "") String mc,
             @RequestParam(name = "mc", defaultValue = "") String mc1,
