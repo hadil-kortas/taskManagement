@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Participants</title>
+</head>
+
+<body class="bg-gray-100">
+
+<nav class="bg-blue-500 p-4 text-white items-center space-x-1 p-1 dark:border-slate-800 dark:bg-slate-950">
+    <div class="container mx-auto">
+        <ul class="flex">
+            <li class="mr-6"><a href="#" class="hover:text-gray-300">Home</a></li>
+            <li class="mr-6"><a href="/api/tasks" class="hover:text-gray-300">Tasks</a></li>
+            <li class="mr-6"><a href="/api/taskAssignment" class="hover:text-gray-300">Task Assignment</a></li>
+        </ul>
+    </div>
+</nav>
+
+<form action="/api/participants" method="get" class="container mx-auto my-4">
+
+    <div class="flex items-center">
+        <label for="inputSearch" class="sr-only">Key Word</label>
+        <input style="height: 40px" type="text" class="form-input h-10 px-4 border rounded" id="inputSearch" name="mc" th:value="${mc}" placeholder="Search...">
+        <button style="height: 40px" type="submit" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded transition duration-0 hover:duration-150">Search</button>
+    </div>
+
+</form>
+
+<table class=" min-w-full text-center table-fixed">
+    <thead class="thead-dark">
+    <tr>
+        <th class="py-2 px-4 border-b">Photo</th>
+        <th class="py-2 px-4 border-b">Username</th>
+        <th class="py-2 px-4 border-b">FirstName</th>
+        <th class="py-2 px-4 border-b">LastName</th>
+        <th class="py-2 px-4 border-b">Job</th>
+        <th class="py-2 px-4 border-b">Contact</th>
+        <th class="py-2 px-4 border-b">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through participants -->
+    <tr th:each="p : ${participants}" class="odd:bg-gray-100 even:bg-white">
+        <td class="py-2 px-4 border-b">
+            <!-- Check if photo is empty or null -->
+            <img th:if="${p.photo=='' or p.photo==null}" src="/photos/inconnu1.jpg" width="100" height="100"
+                 class="rounded-full"/>
+            <img th:unless="${p.photo=='' or p.photo==null}" th:src="${'/photos/' + p.photo}" width="100"
+                 height="100" class="rounded-full"/>
+        </td>
+        <td class="py-2 px-4 border-b" th:text="${p.username}"></td>
+        <td class="py-2 px-4 border-b" th:text="${p.firstname}"></td>
+        <td class="py-2 px-4 border-b" th:text="${p.lastname}"></td>
+        <td class="py-2 px-4 border-b" th:text="${p.job}"></td>
+        <td class="py-2 px-4 border-b" th:text="${p.phone}"></td>
+        <td class="py-2 px-4 border-b" th:text="${p.email}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="mt-4">
+    <ul class="flex">
+        <!-- Previous Page Link -->
+        <li class="mr-2" th:if="${currentpage > 0}">
+            <a class="py-2 px-4 bg-blue-500 text-white rounded"
+               th:href="@{/api/participants(mc=${mc}, page=${currentpage - 1})}">&laquo; Previous</a>
+        </li>
+
+        <!-- Next Page Link -->
+        <li th:if="${participants.hasNext()}" class="ml-2">
+            <a class="py-2 px-4 bg-blue-500 text-white rounded"
+               th:href="@{/api/participants(mc=${mc}, page=${currentpage + 1})}">Next &raquo;</a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

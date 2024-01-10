@@ -62,11 +62,14 @@ html,
 */
 
 body {
+
   margin: 0;
   /* 1 */
   line-height: inherit;
   /* 2 */
 }
+
+
 
 /*
 1. Add the correct height in Firefox.
@@ -619,6 +622,10 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -660,6 +667,11 @@ video {
 
 .text-start {
   text-align: start;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-white {

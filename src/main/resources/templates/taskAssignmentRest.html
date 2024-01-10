@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>TaskAssignment</title>
+</head>
+<body class="bg-gray-100">
+
+<nav class="bg-blue-500 p-4 text-white">
+    <div class="container mx-auto">
+        <ul class="flex">
+            <li class="mr-6"><a href="/api/participants" class="hover:text-gray-300">Home</a></li>
+            <li class="mr-6"><a href="/api/tasks" class="hover:text-gray-300">Tasks</a></li>
+            <li class="mr-6"><a href="" class="hover:text-gray-300">Task Assignment</a></li>
+        </ul>
+    </div>
+</nav>
+
+<form action="/api/taskAssignment" method="get" class="container mx-auto my-4">
+
+
+</form>
+<table class=" min-w-full text-center table-fixed">
+    <thead class="thead-dark">
+    <tr>
+        <th class="py-2 px-4 border-b">Ref</th>
+        <th class="py-2 px-4 border-b">Title</th>
+        <th class="py-2 px-4 border-b">Participant</th>
+        <th class="py-2 px-4 border-b">Start Date</th>
+        <th class="py-2 px-4 border-b">End Date</th>
+        <th class="py-2 px-4 border-b">Status</th>
+        <th class="py-2 px-4 border-b">Progress</th>
+        <th class="py-2 px-4 border-b">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t:${taskAssignment}">
+        <td class="py-2 px-4 border-b" th:text="${t.task.ref}"></td>
+        <td class="py-2 px-4 border-b" th:text="${t.task.title}"></td>
+        <td class="py-2 px-4 border-b" th:text="${t.participant.username}"></td>
+        <td class="py-2 px-4 border-b" th:text="${t.startDate}"></td>
+        <td class="py-2 px-4 border-b" th:text="${t.endDate}"></td>
+        <td class="py-2 px-4 border-b" th:text="${t.taskStatus.status}"></td>
+        <td class="py-2 px-4 border-b">
+            <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                <div class="bg-purple-600 text-xs font-medium text-purple-100 text-center p-0.5 leading-none rounded-full" th:style="'width: ' + ${t.taskStatus.progressPercentage} + '%'">
+                    <span th:text="${t.taskStatus.progressPercentage + '%'}"></span>
+                </div>
+            </div>
+        </td>
+
+        <!--        <td class="py-2 px-4 border-b" >-->
+<!--            <a th:href="@{'/api/edit/taskAssignment/' + ${t.id}}"-->
+<!--               class="btn btn-light fa fa-edit" style="color: deeppink"></a>-->
+<!--        </td>-->
+
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

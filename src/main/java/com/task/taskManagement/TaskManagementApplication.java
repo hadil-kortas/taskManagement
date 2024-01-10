@@ -52,8 +52,8 @@ public class TaskManagementApplication implements CommandLineRunner {
 		return args -> {
 			accountService.addRole("USER");
 			accountService.addRole("ADMIN");
-			accountService.addUser("user", "123", "user@gmail.com");
-			accountService.addUser("admin","123","admin@gmail.com");
+			accountService.addUser("user", "user", "user@gmail.com");
+			accountService.addUser("admin","admin","admin@gmail.com");
 			accountService.addroletoUser("user","USER");
 			accountService.addroletoUser("admin","ADMIN");
 			//accountService.addroletoUser("admin", "USER");
