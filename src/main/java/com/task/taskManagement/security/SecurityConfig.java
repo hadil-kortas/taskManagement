@@ -33,7 +33,7 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(authorize -> {
             authorize
                     .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                    //.requestMatchers("/api/user/**").hasAuthority("USER")
+                    //.requestMatchers("/api/user/**").permitAll()
                     .anyRequest().authenticated();
         });
         httpSecurity.exceptionHandling(exception->exception.accessDeniedPage("/errorPage"));

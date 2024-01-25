@@ -16,7 +16,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 
-public class UserDetailsServiceImplementation implements UserDetailsService {
+public class
+
+UserDetailsServiceImplementation implements UserDetailsService {
 
     IAccountService accountService;
     @Override
